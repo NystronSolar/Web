@@ -1,8 +1,11 @@
 {
-    "type": "project",
-    "license": "proprietary",
+    "name": "nystron-solar/web",
+    "description": "The Nystron Solar Web Project",
+    "license": "GPL-3.0-only",
+    "homepage": "https://github.com/NystronSolar/Web",
     "minimum-stability": "stable",
     "prefer-stable": true,
+    "type": "project",
     "require": {
         "php": ">=8.1",
         "ext-ctype": "*",
@@ -100,5 +103,12 @@
         "symfony/phpunit-bridge": "^6.2",
         "symfony/stopwatch": "6.2.*",
         "symfony/web-profiler-bundle": "6.2.*"
-    }
+    },
+    "authors": [
+        {
+            "name": "TheDevick",
+            "email": "erick@bilhalba.com.br",
+            "homepage": "https://TheDevick.vercel.app"
+        }
+    ]
 }
