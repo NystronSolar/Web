@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends AbstractController
 {
     #[Route(path: '/login', name: 'login.view', methods: 'GET')]
-    public function indexView(): Response
+    public function loginView(): Response
     {
         return $this->render('auth/login.html.twig');
     }
