@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nystron Solar | Dashboard - Index{% endblock %}
+
+{% block main %}
+<main class="text-center">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success ms-5 mt-1" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    <h1 class="mt-2">Nystron Solar Dashboard</h1>
+</main>
+{% endblock %}
