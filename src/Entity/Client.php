@@ -18,17 +18,14 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
+    #[Assert\Email(message: 'The email {{ value }} is not a valid email.')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 11)]
-    #[Assert\NotBlank]
-    #[AppAssert\CPF]
+    #[AppAssert\CPF(message: 'The CPF {{ value }} is not a valid CPF.')]
     private ?string $cpf = null;
 
     #[ORM\Column]

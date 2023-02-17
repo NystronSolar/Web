@@ -17,4 +17,11 @@ class CPF extends Constraint
      * Then, use these in your validator class.
      */
     public $message = 'The value "{{ string }}" is not valid.';
+
+    public function __construct(mixed $options = null, array $groups = null, mixed $payload = null, string $message = null)
+    {
+        parent::__construct($options, $groups, $payload);
+
+        $this->message = $message ?? $this->message;
+    }
 }
