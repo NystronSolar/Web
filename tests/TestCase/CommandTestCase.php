@@ -4,7 +4,6 @@ namespace App\Tests\TestCase;
 
 use Faker\Factory as FakerFactory;
 use Faker\Generator as Faker;
-use PHPUnit\Framework\Constraint\IsEqual;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
