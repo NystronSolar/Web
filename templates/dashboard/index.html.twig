@@ -5,8 +5,10 @@
 {% block main %}
 <main class="text-center">
     {% for message in app.flashes('success') %}
-    <div class="alert alert-success ms-5 mt-1" role="alert">
-        {{ message }}
+    <div class="alert alert-success mx-5 mt-1" role="alert">
+        {% apply markdown_to_html %}
+            {{ message }}
+        {% endapply %}
     </div>
     {% endfor %}
     <h1 class="mt-2">Nystron Solar Dashboard</h1>
