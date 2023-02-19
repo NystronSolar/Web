@@ -10,6 +10,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\Constraints\Email;
@@ -19,8 +20,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
     name: 'app:store-new-client',
     description: 'Store a New Client in the Database',
 )]
-class StoreNewClientCommand extends BaseCommand
+class StoreNewClientCommand extends Command
 {
+    protected SymfonyStyle $io;
     private UserPasswordHasherInterface $passwordHasher;
     private ClientRepository $clientRepository;
     private ValidatorInterface $validator;
@@ -45,7 +47,8 @@ class StoreNewClientCommand extends BaseCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        parent::execute($input, $output);
+        $this->io = new SymfonyStyle($input, $output);
+
         $this->client = new Client();
         $this->io->title('Store a New Client in the Database');
 
@@ -68,6 +71,22 @@ class StoreNewClientCommand extends BaseCommand
         $this->io->success('Client Stored in Database!');
 
         return Command::SUCCESS;
+    }
+
+    protected function askString(string $question, string $type, bool $hide = false): mixed
+    {
+        $validator = function (mixed $value) use ($type) {
+            if ('' === trim((string) $value)) {
+                throw new ConsoleException($type.' cannot be empty!');
+            }
+
+            return $value;
+        };
+
+        $askMethod = $hide ? 'askHidden' : 'ask';
+        $response = $this->io->$askMethod($question, validator: $validator);
+
+        return $response;
     }
 
     private function validate(string $exceptionMessage, Client $client = null)
