@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+	<link href="/assets/info/credits.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+	Nystron Solar | Info - Credits
+{% endblock %}
+
+{% block header %}
+	<header class="pb-3 pt-4 mb-4 border-bottom container">
+		<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+			<img class="rounded me-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
+			<span class="fs-4">Nystron Solar</span>
+		</a>
+	</header>
+{% endblock %}
+
+
+{% block main %}
+	<main class="container py-4">
+		<div class="p-5 mb-4 bg-light rounded-3">
+			<div class="container-fluid py-5">
+				<h1 class="display-5 fw-bold">Credits</h1>
+				<p class="fs-4">This page is designed to give proper credit to icons and software libraries that helped us build the Nystron Solar system.</p>
+			</div>
+		</div>
+
+		<div class="h-100 p-5 bg-light border rounded-3">
+			{% for creditsTypeTitle, creditsType in credits %}
+				<h2>{{ creditsTypeTitle }}</h2>
+				<div class="list-group w-auto">
+					<ol class="list-group list-group">
+						{% for credit in creditsType %}
+							<li class="list-group-item-light list-group-item d-flex justify-content-between align-items-start">
+								<div class="ms-2 me-auto">
+									<div class="fw-bold">
+										<a href="{{ credit.Link }}" target="_blank" class="link-secondary">{{ credit.Title }}</a>
+									</div>
+									<p class="mb-0 opacity-75">By
+										<a href="{{ credit.AuthorLink }}" target="_blank">{{ credit.Author }}</a>
+										From
+										<a href="{{ credit.CorporationLink }}" target="_blank">{{ credit.Corporation }}</a>
+									</p>
+								</div>
+							</li>
+						{% endfor %}
+					</ol>
+				</div>
+			{% endfor %}
+		</div>
+	</main>
+{% endblock %}
