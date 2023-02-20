@@ -1,24 +1,151 @@
 {% extends 'base.html.twig' %}
 
 {% block head %}
-<style>
-    .alert p {
-        margin: 0 !important;
-    }
-</style>
+	<link href="/assets/dashboard/index.css" rel="stylesheet">
 {% endblock %}
 
-{% block title %}Nystron Solar | Dashboard - Index{% endblock %}
+{% block title %}
+	Nystron Solar | Dashboard - Index
+{% endblock %}
+
+{% block header %}
+	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Nystron Solar - Dashboard</a>
+		<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
+		<div class="navbar-nav">
+			<div class="nav-item text-nowrap">
+				<a class="nav-link px-3" href="#">Sign out</a>
+			</div>
+		</div>
+	</header>
+{% endblock %}
 
 {% block main %}
-<main class="text-center">
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-success mx-5 mt-1" role="alert">
-        {% apply markdown_to_html %}
-            {{ message }}
-        {% endapply %}
-    </div>
-    {% endfor %}
-    <h1 class="mt-2">Nystron Solar Dashboard</h1>
-</main>
+	<main class="container-fluid">
+		<div class="row">
+			<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+				<div class="position-sticky pt-3 sidebar-sticky">
+					<ul class="nav flex-column">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/dashboard">
+								<img src="/assets/dashboard/icons/home-active.svg" width="20" height="20"/>
+								Dashboard
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" aria-current="page" href="/dashboard">
+								<img src="/assets/dashboard/icons/electric-bill.svg" width="20" height="20"/>
+								Electric Bills
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" aria-current="page" href="/dashboard">
+								<img src="/assets/dashboard/icons/solar-generation.svg" width="20" height="20"/>
+								Solar Generation
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</main>
+
+	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mx-2">
+		<div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
+			<h1 class="h2">Dashboard</h1>
+			<p>Welcome to Your Dashboard. Here, you can access all your installation data: Electric Bills and Solar Generation.</p>
+		</div>
+
+		<h2>Summary</h2>
+		<div class="table-responsive">
+			<table class="table table-striped table-sm">
+				<thead>
+					<tr>
+						<th scope="col">Month</th>
+						<th scope="col">Energy Generated (kWh)</th>
+						<th scope="col">Credit Scored (kWh)</th>
+						<th scope="col">Bill Price (R$)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>01/2023</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>12/2022</td>
+						<td>290 kWh</td>
+						<td>105 kWh</td>
+						<td>R$27,00</td>
+					</tr>
+					<tr>
+						<td>11/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>10/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>09/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>08/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>07/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>06/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>05/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>04/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>03/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+					<tr>
+						<td>02/2022</td>
+						<td>300 kWh</td>
+						<td>100 kWh</td>
+						<td>R$30,00</td>
+					</tr>
+			</table>
+		</div>
+	</main>
+
+
 {% endblock %}

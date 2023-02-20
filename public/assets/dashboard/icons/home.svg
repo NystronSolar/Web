@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<svg width="459" height="370" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+ <g class="layer">
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <path d="m229.57,0c-3.44,0.07 -6.93,1.29 -10.32,3.5l-212.8,168c-5.47,5.43 -9.31,17.12 -3.68,24.33c5.63,7.21 17.48,8.17 24.32,2.1l202.48,-159.77l202.48,159.77c6.84,6.08 18.95,5.3 24.33,-2.1c4.72,-6.5 3.56,-18.92 -3.68,-24.33l-212.8,-168c-3.5,-2.46 -6.88,-3.56 -10.32,-3.5l-0.01,0zm-134.4,163.98l-33.6,26.6l0,162.23l0,0c0,4.45 1.77,8.73 4.92,11.88c3.15,3.15 7.42,4.92 11.88,4.92l106.4,0c4.46,0 8.73,-1.77 11.88,-4.92c3.15,-3.15 4.92,-7.43 4.92,-11.88l0,-67.2c0,-15.8 12.2,-28 28,-28s28,12.2 28,28l0,67.2c0,4.45 1.77,8.73 4.92,11.88c3.15,3.15 7.42,4.92 11.88,4.92l106.4,0c4.46,0 8.73,-1.77 11.88,-4.92c3.15,-3.15 4.92,-7.43 4.92,-11.88l0,-162.23l-33.6,-26.6l0,172.02l-72.8,0l0,-50.4c0,-33.83 -27.77,-61.6 -61.6,-61.6c-33.84,0 -61.61,27.77 -61.61,61.6l0,50.4l-72.8,0l0,-172.02l0.01,0z" fill="#000000" id="svg_2"/>
+   <use id="svg_3" x="-50.4" xlink:href="#h" y="548.8"/>
+   <use id="svg_4" x="-29.86" xlink:href="#e" y="548.8"/>
+   <use id="svg_5" x="-16.05" xlink:href="#b" y="548.8"/>
+   <use id="svg_6" x="2.95" xlink:href="#d" y="548.8"/>
+   <use id="svg_7" x="21.84" xlink:href="#a" y="548.8"/>
+   <use id="svg_8" x="35.22" xlink:href="#b" y="548.8"/>
+   <use id="svg_9" x="54.21" xlink:href="#k" y="548.8"/>
+   <use id="svg_10" x="84" xlink:href="#j" y="548.8"/>
+   <use id="svg_11" x="104.05" xlink:href="#i" y="548.8"/>
+   <use id="svg_12" x="132.05" xlink:href="#f" y="548.8"/>
+   <use id="svg_13" x="141.64" xlink:href="#u" y="548.8"/>
+   <use id="svg_14" x="160.99" xlink:href="#h" y="548.8"/>
+   <use id="svg_15" x="181.54" xlink:href="#d" y="548.8"/>
+   <use id="svg_16" x="200.43" xlink:href="#t" y="548.8"/>
+   <use id="svg_17" x="220.48" xlink:href="#f" y="548.8"/>
+   <use id="svg_18" x="230.07" xlink:href="#a" y="548.8"/>
+   <use id="svg_19" x="243.46" xlink:href="#d" y="548.8"/>
+   <use id="svg_20" x="262.36" xlink:href="#g" y="548.8"/>
+   <use id="svg_21" x="282.29" xlink:href="#c" y="548.8"/>
+   <use id="svg_22" x="-50.4" xlink:href="#s" y="576.8"/>
+   <use id="svg_23" x="-38.22" xlink:href="#e" y="576.8"/>
+   <use id="svg_24" x="-24.41" xlink:href="#c" y="576.8"/>
+   <use id="svg_25" x="-5.18" xlink:href="#r" y="576.8"/>
+   <use id="svg_26" x="33.75" xlink:href="#a" y="576.8"/>
+   <use id="svg_27" x="47.13" xlink:href="#q" y="576.8"/>
+   <use id="svg_28" x="67.07" xlink:href="#b" y="576.8"/>
+   <use id="svg_29" x="95.8" xlink:href="#p" y="576.8"/>
+   <use id="svg_30" x="119.24" xlink:href="#c" y="576.8"/>
+   <use id="svg_31" x="138.48" xlink:href="#o" y="576.8"/>
+   <use id="svg_32" x="158.41" xlink:href="#g" y="576.8"/>
+   <use id="svg_33" x="188.09" xlink:href="#n" y="576.8"/>
+   <use id="svg_34" x="208.61" xlink:href="#e" y="576.8"/>
+   <use id="svg_35" x="222.42" xlink:href="#c" y="576.8"/>
+   <use id="svg_36" x="241.66" xlink:href="#m" y="576.8"/>
+   <use id="svg_37" x="251.25" xlink:href="#b" y="576.8"/>
+   <use id="svg_38" x="270.25" xlink:href="#l" y="576.8"/>
+   <use id="svg_39" x="286.84" xlink:href="#a" y="576.8"/>
+  </g>
+ </g>
+</svg>
