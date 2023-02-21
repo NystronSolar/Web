@@ -27,6 +27,9 @@ security:
                 # target: app_any_route
             login_throttling:
                 max_attempts: 3
+        secured_area:
+            form_login:
+                enable_csrf: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
