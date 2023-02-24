@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block title %}
+	Nystron Solar | Admin - Upload Generation Report
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+	<h1>Upload Generation Report</h1>
+	<form action="{{ path('app.admin.upload.generation.action') }}" method="post" enctype="multipart/form-data">
+		<input type="file" id="report" name="report" accept=".xls, .xlsx">
+		<button type="submit">Submit!</button>
+	</form>
+{% endblock %}

@@ -12,6 +12,8 @@ class DashboardController extends AbstractController
     #[Route(path: '/', name: 'index', methods: 'GET')]
     public function index(): Response
     {
-        return $this->render('dashboard/index.html.twig');
+        $isAdmin = array_search('ROLE_ADMIN', $this->getUser()->getRoles()) ? true : false;
+
+        return $this->render('dashboard/index.html.twig', ['is_admin' => $isAdmin]);
     }
 }

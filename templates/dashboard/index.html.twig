@@ -17,7 +17,7 @@
 		<input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
 		<div class="navbar-nav">
 			<div class="nav-item text-nowrap">
-				<a class="nav-link px-3" href="#">Sign out</a>
+				<a class="nav-link px-3" href="{{ path('app.security.logout') }}">Log out</a>
 			</div>
 		</div>
 	</header>
@@ -30,7 +30,7 @@
 				<div class="position-sticky pt-3 sidebar-sticky">
 					<ul class="nav flex-column">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/dashboard">
+							<a class="nav-link active" aria-current="page" href="{{ path('app.dashboard.index') }}">
 								<img src="/assets/dashboard/icons/home-active.svg" width="20" height="20"/>
 								Dashboard
 							</a>
@@ -57,6 +57,10 @@
 		<div class="align-items-center pt-3 pb-2 mb-3 border-bottom">
 			<h1 class="h2">Dashboard</h1>
 			<p>Welcome to Your Dashboard. Here, you can access all your installation data: Electric Bills and Solar Generation.</p>
+			{% if is_admin %}
+				<h2 class="h3">You are an Admin! 😎</h2>
+				<p>Check out your <a href="{{ path('app.admin.index') }}">Admin Page</a>!</p>
+			{% endif %}
 		</div>
 
 		<h2>Summary</h2>
@@ -143,6 +147,7 @@
 						<td>100 kWh</td>
 						<td>R$30,00</td>
 					</tr>
+				</tbody>
 			</table>
 		</div>
 	</main>
