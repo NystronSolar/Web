@@ -41,8 +41,8 @@ class AppFixtures extends Fixture
         $defaultClient = $this->createOneClient(
             'Client',
             'client@user.com',
-            'Client',
             $this->getFaker()->cpf(false),
+            'Client',
             ['ROLE_USER'],
             'client'
         );
