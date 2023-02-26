@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block title %}
+	Nystron Solar | Admin - Clients - Index
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+	<main class="bg-dark p-3">
+		<h1 class="text-white">All Clients</h1>
+		<table class="table table-bordered table-striped table-dark">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Email</th>
+					<th scope="col">Roles</th>
+					<th scope="col">Growatt Name</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for client in clients %}
+					<tr>
+						<th scope="rol">
+							<a href="" class="text-light">{{ client.Id }}</a>
+						</th>
+						<td>{{ client.Name }}</td>
+						<td>{{ client.Email }}</td>
+						<td>{{ client.Roles }}</td>
+						<td>{{ client.GrowattName }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</main>
+{% endblock %}
