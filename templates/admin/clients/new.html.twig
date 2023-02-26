@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+	<link href="/assets/admin/client/new.css" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+	Nystron Solar | Admin - Clients - New
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+	<main class="text-center form-signin w-100 m-auto">
+		<img class="rounded mb-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="130" height="112">
+		<h1 class="h3 mb-3 fw-normal">Create New Nystron Solar Client</h1>
+
+		{% if errors %}
+			{% for error in errors %}
+				<div class="alert alert-danger mt-1 w-100" role="alert">
+					{{ error.messageTemplate }}
+				</div>
+			{% endfor %}
+		{% endif %}
+
+
+		<form action="{{ path('app.admin.clients.new') }}" method="post">
+			<div class="form-floating mt-2 mb-2">
+				<input type="text" class="form-control" id="name" placeholder="Name" name="name" required autofocus>
+				<label for="name">Name</label>
+			</div>
+			<div class="form-floating mt-2 mb-2">
+				<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
+				<label for="email">Email</label>
+			</div>
+			<div class="form-floating mt-2 mb-2">
+				<input type="text" class="form-control" id="cpf" placeholder="xxx.xxx.xxx-xx" name="cpf" maxlength="14" required>
+				<label for="cpf">CPF</label>
+			</div>
+			<div class="form-floating mt-2 mb-2">
+				<input type="text" class="form-control" id="growattName" placeholder="Growatt Name" name="growattName" required>
+				<label for="growattName">Growatt Name</label>
+			</div>
+			<div class="form-floating mt-2 mb-2">
+				<input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
+				<label for="password">Password</label>
+			</div>
+			<input type="hidden" name="token" value="{{ csrf_token('new-client') }}"/>
+			<div class="mb-3"></div>
+			<button class="w-100 btn btn-lg btn-primary" type="submit">Create Client</button>
+		</form>
+	</main>
+	<script src="/assets/utils/cpfMask.js"></script>
+{% endblock %}
