@@ -33,6 +33,7 @@ class AppFixtures extends Fixture
             'Admin',
             'admin@user.com',
             $this->getFaker()->cpf(false),
+            'Admin',
             ['ROLE_USER', 'ROLE_ADMIN'],
             'admin'
         );
@@ -40,6 +41,7 @@ class AppFixtures extends Fixture
         $defaultClient = $this->createOneClient(
             'Client',
             'client@user.com',
+            'Client',
             $this->getFaker()->cpf(false),
             ['ROLE_USER'],
             'client'
@@ -65,13 +67,14 @@ class AppFixtures extends Fixture
         return $passwordHasher->hashPassword($client, $password);
     }
 
-    public function createOneClient(string $name, string $email, string $cpf, array $roles, string $password, bool $hashPassword = true): Client
+    public function createOneClient(string $name, string $email, string $cpf, string $growattName, array $roles, string $password, bool $hashPassword = true): Client
     {
         $client = new Client();
 
         $client->setName($name);
         $client->setEmail($email);
         $client->setCPF($cpf);
+        $client->setGrowattName($growattName);
         $client->setRoles($roles);
 
         if ($hashPassword) {
@@ -103,6 +106,7 @@ class AppFixtures extends Fixture
             $this->getFaker()->name(),
             $this->getFaker()->email(),
             $this->getFaker()->cpf(false),
+            $this->getFaker()->userName(),
             ['ROLE_USER'],
             $this->getFaker()->password()
         );

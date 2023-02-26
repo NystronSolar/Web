@@ -37,6 +37,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $growattName = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -88,6 +91,18 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
+    public function getRolesToString(): string
+    {
+        $str = '';
+        $len = sizeof($this->getRoles()) - 1;
+
+        foreach ($this->getRoles() as $key => $value) {
+            $str .= $key === $len ? $value : sprintf('%s, ', $value);
+        }
+
+        return $str;
+    }
+
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -129,5 +144,30 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getGrowattName(): ?string
+    {
+        return $this->growattName;
+    }
+
+    public function setGrowattName(string $growattName): self
+    {
+        $this->growattName = $growattName;
+
+        return $this;
+    }
+
+    public function toArray(bool $strings = false)
+    {
+        return [
+            "Id" => $this->getId(),
+            "Email" => $this->getEmail(),
+            "Name" => $this->getName(),
+            "CPF" => $this->getCPF(),
+            "Roles" => $strings ? $this->getRolesToString() : $this->getRoles(),
+            "Password" => $this->getPassword(),
+            "GrowattName" => $this->getGrowattName(),
+        ];
     }
 }
