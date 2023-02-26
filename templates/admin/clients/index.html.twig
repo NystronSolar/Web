@@ -11,6 +11,11 @@
 {% block main %}
 	<main class="bg-dark p-3">
 		<h1 class="text-white">All Clients</h1>
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
 		<table class="table table-bordered table-striped table-dark">
 			<thead>
 				<tr>

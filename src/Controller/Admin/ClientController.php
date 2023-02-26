@@ -67,5 +67,11 @@ class ClientController extends AbstractController
     #[Route(path: '/destroy/{client}', name: 'destroy', methods: ['DELETE', 'GET'])]
     public function destroy(Request $request, Client $client, ClientRepository $clientRepository): Response
     {
+        $clientName = $client->getName();
+        $clientRepository->remove($client, true);
+
+        $this->addFlash('success', sprintf('Client %s Deleted.', $clientName));
+
+        return $this->redirectToRoute('app.admin.clients.index');
     }
 }
