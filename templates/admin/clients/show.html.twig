@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block title %}
+	Nystron Solar | Admin - Clients - Show
+	{{ client.name }}
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block main %}
+	<main class="bg-dark p-3 text-white">
+		<h1>{{ client.name }}</h1>
+		<p>
+			<span class="fw-bold">Id</span>:
+			<span class="fst-italic">{{ client.id }}</span>
+		</p>
+		<p>
+			<span class="fw-bold">Name</span>:
+			<span class="fst-italic">{{ client.name }}</span>
+		</p>
+		<p>
+			<span class="fw-bold">Email</span>:
+			<span class="fst-italic">{{ client.email }}</span>
+		</p>
+		<p>
+			<span class="fw-bold">Roles</span>:
+			<span class="fst-italic">{{ client.getRolesToString() }}</span>
+		</p>
+		<p>
+			<span class="fw-bold">GrowattName</span>:
+			<span class="fst-italic">{{ client.growattName }}</span>
+		</p>
+
+		<a class="btn btn-outline-danger" onclick="return confirm('Are you sure?')" href="{{ path('app.admin.clients.destroy', {client: client.id}) }}">Delete Client</a>
+	</main>
+{% endblock %}

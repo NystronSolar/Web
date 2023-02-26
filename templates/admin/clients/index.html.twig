@@ -25,7 +25,7 @@
 				{% for client in clients %}
 					<tr>
 						<th scope="rol">
-							<a href="" class="text-light">{{ client.Id }}</a>
+							<a href="{{ path('app.admin.clients.show', {client: client.Id}) }}" class="text-light">{{ client.Id }}</a>
 						</th>
 						<td>{{ client.Name }}</td>
 						<td>{{ client.Email }}</td>

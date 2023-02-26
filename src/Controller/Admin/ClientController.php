@@ -56,13 +56,16 @@ class ClientController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/{book}', name: 'show', methods: 'GET')]
-    public function show(Request $request, ClientRepository $clientRepository): Response
+    #[Route(path: '/{client}', name: 'show', methods: 'GET', requirements: ['clients' => '\d+'])]
+    public function show(Request $request, Client $client): Response
     {
+        return $this->render('admin/clients/show.html.twig', [
+            'client' => $client,
+        ]);
     }
 
-    #[Route(path: '/{book}', name: 'destroy', methods: 'DELETE')]
-    public function destroy(Request $request, ClientRepository $clientRepository): Response
+    #[Route(path: '/destroy/{client}', name: 'destroy', methods: ['DELETE', 'GET'])]
+    public function destroy(Request $request, Client $client, ClientRepository $clientRepository): Response
     {
     }
 }
