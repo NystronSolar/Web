@@ -31,15 +31,15 @@ class AdminController extends AbstractController
         /** @var UploadedFile $report */
         $report = $request->files->all()['report'];
 
-        $reportFolder = $this->getParameter('kernel.project_dir') . '/var/uploads/';
+        $reportFolder = $this->getParameter('kernel.project_dir').'/var/uploads/';
         $reportFileName = $report->getClientOriginalName();
         $report->move($reportFolder, $reportFileName);
 
-        $reader = ReaderFactory::fromFile($reportFolder . $reportFileName);
+        $reader = ReaderFactory::fromFile($reportFolder.$reportFileName);
         $reportSpreadsheet = $reader->search();
 
         $filesystem = new Filesystem();
-        $filesystem->remove($reportFolder . $reportFileName);
+        $filesystem->remove($reportFolder.$reportFileName);
 
         dd($reportSpreadsheet);
     }
