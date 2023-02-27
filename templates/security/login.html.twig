@@ -1,13 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-<link href="/assets/security/login.css" rel="stylesheet">
-{% endblock %}
-
 {% block title %}Log in!{% endblock %}
 
 {% block main %}
-<main class="text-center form-signin w-100 m-auto">
+	<main class="container m-5 text-light d-flex flex-column align-items-center">
     <img class="rounded mb-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="130" height="112">
     <h1 class="h3 mb-3 fw-normal">Sign in to Nystron Solar</h1>
 
@@ -17,14 +13,14 @@
     </div>
     {% endif %}
 
-    <form action="{{ path('app.security.login') }}" method="post">
+    <form action="{{ path('app.security.login') }}" method="post" class="w-50">
         {% if app.user %}
             <div class="mb-3">
                 You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app.security.logout') }}">Logout</a>
             </div>
         {% endif %}
 
-        <div class="form-floating">
+        <div class="form-floating pb-2">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email" value="{{ last_username }}" autocomplete="email" required autofocus>
             <label for="floatingInput">Email</label>
         </div>
