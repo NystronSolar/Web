@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% block title %}
+	Nystron Solar | Admin - Index
+{% endblock %}
+
+{% block main %}
+	<main class="bg-dark p-3 text-light">
+		<section class="jumbotron text-center">
+			<div class="container">
+				<h1 class="jumbotron-heading">Nystron Solar ⚡</h1>
+				<p class="lead .text-secondary-emphasis">Nós somos a
+					<span class="fw-bold">Nystron Solar</span>. Uma empresa de Energia Solar com sede em Quaraí - Rio Grande do Sul - Brasil</p>
+				<p>
+					<a href="{{ path('app.info.contact' )}}" class="btn btn-primary my-2">Quero Entrar em Contato!</a>
+					<a href="{{ path('app.security.login' )}}" class="btn btn-secondary my-2">Já Sou Cliente</a>
+				</p>
+			</div>
+		</section>
+	</main>
+{% endblock %}
