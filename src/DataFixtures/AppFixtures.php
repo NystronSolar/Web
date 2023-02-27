@@ -50,6 +50,50 @@ class AppFixtures extends Fixture
         $clients = $this->createManyFakerClient(5);
         $clients[] = $defaultAdmin;
         $clients[] = $defaultClient;
+        $clients[] = $this->createOneClient(
+            'Tim',
+            'tim@user.com',
+            $this->getFaker()->cpf(false),
+            'Tim',
+            ['ROLE_USER'],
+            'Tim'
+        );
+
+        $clients[] = $this->createOneClient(
+            'Noah',
+            'noah@user.com',
+            $this->getFaker()->cpf(false),
+            'Noah',
+            ['ROLE_USER'],
+            'Noah'
+        );
+
+        $clients[] = $this->createOneClient(
+            'Mia',
+            'mia@user.com',
+            $this->getFaker()->cpf(false),
+            'Mia',
+            ['ROLE_USER'],
+            'Mia'
+        );
+
+        $clients[] = $this->createOneClient(
+            'Mary',
+            'mary@user.com',
+            $this->getFaker()->cpf(false),
+            'Mary',
+            ['ROLE_USER'],
+            'Mary'
+        );
+
+        $clients[] = $this->createOneClient(
+            'Steven',
+            'steven@user.com',
+            $this->getFaker()->cpf(false),
+            'Steven',
+            ['ROLE_USER'],
+            'Steven'
+        );
 
         /** @var \App\Repository\ClientRepository $clientRepository */
         $clientRepository = $manager->getRepository(Client::class);
