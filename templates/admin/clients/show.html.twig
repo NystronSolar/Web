@@ -7,12 +7,10 @@
 	{{ client.name }}
 {% endblock %}
 
-{% block header %}{% endblock %}
-
 {% block main %}
 	<main class="p-3 text-white">
-		<a href="{{ path('app.admin.clients.index') }}">Back to Index</a>
 		<h1>{{ client.name }}</h1>
+		<a href="{{ path('app.admin.clients.index') }}">Back to Clients Index</a>
 		<p>
 			<span class="fw-bold">Id</span>:
 			<span class="fst-italic">{{ client.id }}</span>

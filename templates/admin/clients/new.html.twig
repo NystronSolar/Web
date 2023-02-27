@@ -1,30 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-	<link href="/assets/admin/client/new.css" rel="stylesheet">
-{% endblock %}
-
 {% block title %}
 	Nystron Solar | Admin - Clients - New
 {% endblock %}
 
-{% block header %}{% endblock %}
-
 {% block main %}
-	<main class="text-center form-signin w-100 m-auto">
-		<img class="rounded mb-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="130" height="112">
-		<h1 class="h3 mb-3 fw-normal">Create New Nystron Solar Client</h1>
+	<main class="my-5 text-light d-flex flex-column align-items-center">
+		<h1 class="h3 fw-normal">Create New Nystron Solar Client</h1>
+		<a href="{{ path('app.admin.clients.index') }}" class="mb-3">Back to Clients Index</a>
 
-		{% if errors %}
+		<form action="{{ path('app.admin.clients.new') }}" method="post" class="w-50">
 			{% for error in errors %}
 				<div class="alert alert-danger mt-1 w-100" role="alert">
 					{{ error.messageTemplate }}
 				</div>
 			{% endfor %}
-		{% endif %}
-
-
-		<form action="{{ path('app.admin.clients.new') }}" method="post">
 			<div class="form-floating mt-2 mb-2">
 				<input type="text" class="form-control" id="name" placeholder="Name" name="name" required autofocus>
 				<label for="name">Name</label>

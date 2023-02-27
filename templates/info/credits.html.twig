@@ -1,33 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-	<link href="/assets/info/credits.css" rel="stylesheet">
-{% endblock %}
-
 {% block title %}
 	Nystron Solar | Info - Credits
-{% endblock %}
-
-{% block header %}
-	<header class="pb-3 pt-4 mb-4 border-bottom container">
-		<a href="/" class="d-flex align-items-center text-dark text-decoration-none">
-			<img class="rounded me-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
-			<span class="fs-4">Nystron Solar</span>
-		</a>
-	</header>
 {% endblock %}
 
 
 {% block main %}
 	<main class="container py-4">
-		<div class="p-5 mb-4 bg-light rounded-3">
+		<div class="p-5 mb-4 rounded-3">
 			<div class="container-fluid py-5">
 				<h1 class="display-5 fw-bold">Credits</h1>
 				<p class="fs-4">This page is designed to give proper credit to icons and software libraries that helped us build the Nystron Solar system.</p>
 			</div>
 		</div>
 
-		<div class="h-100 p-5 bg-light border rounded-3">
+		<div class="h-100 p-5 border rounded-3">
 			{% for creditsTypeTitle, creditsType in credits %}
 				<h2>{{ creditsTypeTitle }}</h2>
 				<div class="list-group w-auto">

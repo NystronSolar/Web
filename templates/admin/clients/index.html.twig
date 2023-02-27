@@ -6,17 +6,16 @@
 	Nystron Solar | Admin - Clients - Index
 {% endblock %}
 
-{% block header %}{% endblock %}
-
 {% block main %}
 	<main class="p-3">
 		<h1 class="text-white">All Clients</h1>
+		<a href="{{ path('app.admin.index') }}">Back to Admin Index</a>
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success">
 				{{ message }}
 			</div>
 		{% endfor %}
-		<table class="table table-bordered table-striped table-dark">
+		<table class="table table-bordered table-striped table-dark mt-3">
 			<thead>
 				<tr>
 					<th scope="col">#</th>
