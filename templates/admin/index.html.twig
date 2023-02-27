@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block head %}
-{% endblock %}
+{% block head %}{% endblock %}
 
 {% block title %}
 	Nystron Solar | Admin - Index
 {% endblock %}
 
-{% block header %}
-
-{% endblock %}
-
 {% block main %}
-<a href="{{ path('app.admin.upload.generation.view') }}">Upload Solar Generation Report</a>
+	<main class="bg-dark p-3">
+		<h1 class="text-white">Admin Dashboard</h1>
+		<p>Here, you can manage all the system.</p>
+		<div class="list-group list-group-dark">
+			<a href="{{ path('app.admin.clients.index') }}" class="list-group-item list-group-item-action">Clients</a>
+			<a href="{{ path('app.admin.uploads.reports.generation') }}" class="list-group-item list-group-item-action">Upload an Report Generation</a>
+			<a class="list-group-item list-group-item-action disabled">🚧 Clients Dashboard | We don't have this feature yet. 🚧</a>
+		</div>
+	</main>
 {% endblock %}
