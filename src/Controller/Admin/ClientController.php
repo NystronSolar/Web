@@ -45,7 +45,7 @@ class ClientController extends AbstractController
 
             $clientRepository->save($client, true);
 
-            dd($client);
+            return $this->redirectToRoute('app.admin.clients.show', ['client' => $client->getId()]);
         }
 
         $errors = $form->getErrors();
