@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/info', name: 'app.info.')]
@@ -42,5 +43,10 @@ class InfoController extends AbstractController
         ];
 
         return $this->render('info/credits.html.twig', ['credits' => $credits]);
+    }
+    #[Route(path: '/contact', name: 'contact', methods: 'GET')]
+    public function contact(): Response
+    {
+        throw new NotFoundHttpException();
     }
 }
