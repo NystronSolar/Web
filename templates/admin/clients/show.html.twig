@@ -3,7 +3,11 @@
 {% block head %}{% endblock %}
 
 {% block title %}
-	Nystron Solar | {{ 'base.admin'|trans|raw }} - {{ 'base.client'|trans|raw }} {{ client.name }}
+	Nystron Solar |
+	{{ 'base.admin'|trans|raw }}
+	-
+	{{ 'base.client'|trans|raw }}
+	{{ client.name }}
 {% endblock %}
 
 {% block main %}
@@ -15,7 +19,7 @@
 			<span class="fst-italic">{{ client.id }}</span>
 		</p>
 		<p>
-			<span class="fw-bold">{{ 'base.name'|trans|raw }}</span>:
+			<span class="fw-bold">{{ 'base.forms.name'|trans|raw }}</span>:
 			<span class="fst-italic">{{ client.name }}</span>
 		</p>
 		<p>

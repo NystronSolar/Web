@@ -1,7 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Nystron Solar | {{ 'base.login'|trans|raw }}
+	Nystron Solar |
+	{{ 'base.login'|trans|raw }}
 {% endblock %}
 
 {% block main %}
@@ -21,9 +22,9 @@
 				<label for="floatingInput">Email</label>
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" id="floatingPassword" placeholder=" {{ 'base.password'|trans|raw }} " name="password" autocomplete="password" required>
+				<input type="password" class="form-control" id="floatingPassword" placeholder=" {{ 'base.forms.password'|trans|raw }} " name="password" autocomplete="password" required>
 				<label for="floatingPassword">
-					{{ 'base.password'|trans|raw }}
+					{{ 'base.forms.password'|trans|raw }}
 				</label>
 			</div>
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
