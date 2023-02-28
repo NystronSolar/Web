@@ -7,8 +7,11 @@ base.contact: Contacto
 base.login: Iniciar Sesión
 base.clients: Clientes
 base.client: Cliente
-base.new: Nuevo
-base.password: Contraseña
+base.forms.new: Nuevo
+base.forms.name: Nombre
+base.forms.roles: Habilidades
+base.forms.growatt_name: Nombre en Growatt
+base.forms.password: Contraseña
 base.electric_bills: Facturas de Electricidad
 base.generation_details: Detalles de Generación
 base.generation: Detalles de Generación
@@ -27,7 +30,7 @@ route.credits.icons.electric_bill: Factura de electricidad
 route.credits.icons.solar_powered_home: Casa con Energía Solar
 
 route.security.login.title: Entrar en Nystron Solar
-route.security.login.sign_in_button: Entrar
+route.security.login.submit_button: Entrar
 
 route.dashboard.index.title.text: Bienvenido a tu panel de control. Aquí puede acceder a todos los datos de su instalación. Consulte el menú de la izquierda para obtener más detalles.
 route.dashboard.index.admin_subtitle: ¡Eres un administrador! 😎
@@ -45,9 +48,10 @@ route.admin.index.features_list.control_electric_bills: Control de Cuentas de Lu
 
 route.admin.clients.index.title: Lista de Clientes
 route.admin.clients.index.back_admin_index: Volver al Panel de Administración
-route.admin.clients.index.clients.name: Nombre
-route.admin.clients.index.clients.roles: Habilidades
-route.admin.clients.index.clients.growatt_name: Nombre en Growatt
 route.admin.clients.index.add_new_client: Agregar nuevo cliente
+
+route.admin.clients.new.title: Agregar un nuevo Cliente Nystron Solar
+route.admin.clients.new.back_clients_list: Volver a la Lista de Clientes
+route.admin.clients.new.submit_button: Agregar Cliente
 
 route.admin.upload_generation_report: Enviar Informe de Generación

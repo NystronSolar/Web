@@ -22,11 +22,13 @@
 			</div>
 			<div class="form-floating">
 				<input type="password" class="form-control" id="floatingPassword" placeholder=" {{ 'base.password'|trans|raw }} " name="password" autocomplete="password" required>
-				<label for="floatingPassword"> {{ 'base.password'|trans|raw }} </label>
+				<label for="floatingPassword">
+					{{ 'base.password'|trans|raw }}
+				</label>
 			</div>
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
 			<div class="mb-3"></div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">{{ 'route.security.login.sign_in_button'|trans|raw }}</button>
+			<button class="w-100 btn btn-lg btn-primary" type="submit">{{ 'route.security.login.submit_button'|trans|raw }}</button>
 		</form>
 	</main>
 {% endblock %}

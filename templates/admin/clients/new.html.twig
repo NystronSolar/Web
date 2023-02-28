@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Nystron Solar | {{ 'base.admin'|trans|raw }} - {{ 'base.new'|trans|raw }} {{ 'base.client'|trans|raw }}
+	Nystron Solar | {{ 'base.admin'|trans|raw }} - {{ 'base.forms.new'|trans|raw }} {{ 'base.client'|trans|raw }}
 {% endblock %}
 
 {% block main %}
 	<main class="my-5 text-light d-flex flex-column align-items-center">
-		<h1 class="h3 fw-normal">Create New Nystron Solar Client</h1>
-		<a href="{{ path('app.admin.clients.index') }}" class="mb-3">Back to Clients Index</a>
+		<h1 class="h3 fw-normal">{{ 'route.admin.clients.new.title'|trans|raw }}</h1>
+		<a href="{{ path('app.admin.clients.index') }}" class="mb-3">{{ 'route.admin.clients.new.back_clients_list'|trans|raw }}</a>
 
 		<form action="{{ path('app.admin.clients.new') }}" method="post" class="w-50">
 			{% for error in errors %}
@@ -16,8 +16,8 @@
 				</div>
 			{% endfor %}
 			<div class="form-floating mt-2 mb-2">
-				<input type="text" class="form-control" id="name" placeholder="Name" name="name" required autofocus>
-				<label for="name">Name</label>
+				<input type="text" class="form-control" id="name" placeholder="{{ 'base.forms.name'|trans|raw }}" name="name" required autofocus>
+				<label for="name">{{ 'base.forms.name'|trans|raw }}</label>
 			</div>
 			<div class="form-floating mt-2 mb-2">
 				<input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" required>
@@ -28,16 +28,16 @@
 				<label for="cpf">CPF</label>
 			</div>
 			<div class="form-floating mt-2 mb-2">
-				<input type="text" class="form-control" id="growattName" placeholder="Growatt Name" name="growattName" required>
-				<label for="growattName">Growatt Name</label>
+				<input type="text" class="form-control" id="growattName" placeholder="{{ 'base.forms.growatt_name'|trans|raw }}" name="growattName" required>
+				<label for="growattName">{{ 'base.forms.growatt_name'|trans|raw }}</label>
 			</div>
 			<div class="form-floating mt-2 mb-2">
 				<input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
-				<label for="password">Password</label>
+				<label for="password">{{ 'base.forms.password'|trans|raw }}</label>
 			</div>
 			<input type="hidden" name="token" value="{{ csrf_token('new-client') }}"/>
 			<div class="mb-3"></div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">Create Client</button>
+			<button class="w-100 btn btn-lg btn-primary" type="submit">{{ 'route.admin.clients.new.submit_button'|trans|raw }}</button>
 		</form>
 	</main>
 	<script src="/assets/utils/cpfMask.js"></script>

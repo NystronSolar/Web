@@ -7,8 +7,11 @@ base.contact: Contact
 base.login: Login
 base.clients: Clients
 base.client: Client
-base.new: Novo
-base.password: Password
+base.forms.new: Novo
+base.forms.name: Name
+base.forms.roles: Roles
+base.forms.growatt_name: Growatt Name
+base.forms.password: Password
 base.electric_bills: Electric Bills
 base.generation_details: Generation Details
 base.generation: Generation
@@ -27,7 +30,7 @@ route.credits.icons.electric_bill: Electric Bill
 route.credits.icons.solar_powered_home: Solar Powered Home
 
 route.security.login.title: Sign in to Nystron Solar
-route.security.login.sign_in_button: Sign in
+route.security.login.submit_button: Sign in
 
 route.dashboard.index.title.text: Welcome to your dashboard. Here you can access all the data of your installation. Check the menu on the left for more details.
 route.dashboard.index.admin_subtitle: You are an Admin! 😎
@@ -45,9 +48,10 @@ route.admin.index.features_list.control_electric_bills: Control Electric Bills
 
 route.admin.clients.index.title: List of Clients
 route.admin.clients.index.back_admin_index: Back to Admin Index
-route.admin.clients.index.clients.name: Name
-route.admin.clients.index.clients.roles: Roles
-route.admin.clients.index.clients.growatt_name: Growatt Name
 route.admin.clients.index.add_new_client: Add new Client
+
+route.admin.clients.new.title: Add a New Nystron Solar Client
+route.admin.clients.new.back_clients_list: Back to Clients List
+route.admin.clients.new.submit_button: Add Client
 
 route.admin.upload_generation_report: Upload Generation Report
