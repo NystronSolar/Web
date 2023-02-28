@@ -1,11 +1,19 @@
 controllers:
     resource:
-        path: ../src/Controller/
+        path: '../src/Controller/'
         namespace: App\Controller
     type: attribute
+    prefix: /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
 
 app.index:
-    path:          /
-    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    path: /{_locale}
+    controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController::templateAction
+    requirements:
+        _locale: '%app_locales%'
     defaults:
-        template:  'index.html.twig'
+        template: index.html.twig
+        _locale: '%locale%'
