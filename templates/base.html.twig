@@ -34,17 +34,17 @@
                     </button>
                     <div>
                         <div class="navbar-nav collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <a class="nav-link px-3" href="/">Home</a>
+                            <a class="nav-link px-3" href="/">{{ 'base.homepage'|trans|raw }}</a>
                             {% if app.user %}
-                                <a class="nav-link px-3" href="{{ path('app.security.logout') }}">Log out</a>
-                                <a class="nav-link px-3" href="{{ path('app.dashboard.index') }}">Dashboard</a>
+                                <a class="nav-link px-3" href="{{ path('app.security.logout') }}">{{ 'base.logout'|trans|raw }}</a>
+                                <a class="nav-link px-3" href="{{ path('app.dashboard.index') }}">{{ 'base.dashboard'|trans|raw }}</a>
                                 {% if 'ROLE_ADMIN' in app.user.getroles %}
-                                    <a class="nav-link px-3" href="{{ path('app.admin.index') }}">Admin</a>
+                                    <a class="nav-link px-3" href="{{ path('app.admin.index') }}">{{ 'base.admin'|trans|raw }}</a>
                                 {% endif %}
                             {% endif %}
                             <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Language
+                                Idioma
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="{{ path(app.request.get('_route'), {_locale: 'pt'}) }}">Português</a></li>
@@ -69,19 +69,16 @@
 
             <ul class="nav col-md-4 justify-content-end">
                 <li class="nav-item">
-                    <a href="{{ path('app.index' )}}" class="nav-link px-2 text-secondary">Home</a>
+                    <a href="{{ path('app.index' )}}" class="nav-link px-2 text-secondary">{{ 'base.homepage'|trans|raw }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('app.security.login' )}}" class="nav-link px-2 text-secondary">Login</a>
+                    <a href="{{ path('app.dashboard.index' )}}" class="nav-link px-2 text-secondary">{{ 'base.dashboard'|trans|raw }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('app.dashboard.index' )}}" class="nav-link px-2 text-secondary">Dashboard</a>
+                    <a href="{{ path('app.info.contact' )}}" class="nav-link px-2 text-secondary">{{ 'base.contact'|trans|raw }}</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ path('app.info.contact' )}}" class="nav-link px-2 text-secondary">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ path('app.info.credits' )}}" class="nav-link px-2 text-secondary">Credits</a>
+                    <a href="{{ path('app.info.credits' )}}" class="nav-link px-2 text-secondary">{{ 'base.credits'|trans|raw }}</a>
                 </li>
             </ul>
         </footer>

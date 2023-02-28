@@ -11,11 +11,12 @@
 		<section class="jumbotron text-center">
 			<div class="container">
 				<h1 class="jumbotron-heading">Nystron Solar ⚡</h1>
-				<p class="lead .text-secondary-emphasis">We are the
-					<span class="fw-bold">Nystron Solar</span>. A Solar Energy company based in Quaraí - Rio Grande do Sul - Brazil</p>
+				<p class="lead .text-secondary-emphasis">
+					{{ 'route.index.subtitle'|trans({'%open_bold%': '<span class="fw-bold">', '%close_bold%': '</span>'})|raw }}
+				</p>
 				<p>
-					<a href="{{ path('app.info.contact' )}}" class="btn btn-primary m-2">I Wan't to know more!</a>
-					<a href="{{ path('app.security.login' )}}" class="btn btn-secondary m-2">I'm already a client</a>
+					<a href="{{ path('app.info.contact' )}}" class="btn btn-primary m-2">{{'route.index.buttons.contact'|trans}}</a>
+					<a href="{{ path('app.security.login' )}}" class="btn btn-secondary m-2">{{'route.index.buttons.i_am_client'|trans}}</a>
 				</p>
 			</div>
 		</section>
