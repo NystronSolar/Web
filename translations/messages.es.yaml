@@ -7,10 +7,10 @@ base.contact: Contacto
 base.login: Iniciar Sesión
 base.clients: Clientes
 base.client: Cliente
+base.roles: Habilidades
+base.growatt_name: Nombre en Growatt
 base.forms.new: Nuevo
 base.forms.name: Nombre
-base.forms.roles: Habilidades
-base.forms.growatt_name: Nombre en Growatt
 base.forms.password: Contraseña
 base.electric_bills: Facturas de Electricidad
 base.generation_details: Detalles de Generación
@@ -46,12 +46,15 @@ route.admin.index.features_list.control_clients: Control de Usuario
 route.admin.index.features_list.upload_report_generation: Enviar Informe de Generación
 route.admin.index.features_list.control_electric_bills: Control de Cuentas de Luz
 
+route.admin.clients.base.back_clients_list: Volver a la Lista de Clientes
+
 route.admin.clients.index.title: Lista de Clientes
 route.admin.clients.index.back_admin_index: Volver al Panel de Administración
 route.admin.clients.index.add_new_client: Agregar nuevo cliente
 
 route.admin.clients.new.title: Agregar un nuevo Cliente Nystron Solar
-route.admin.clients.new.back_clients_list: Volver a la Lista de Clientes
 route.admin.clients.new.submit_button: Agregar Cliente
+
+route.admin.clients.show.delete_button: Eliminar Cliente
 
 route.admin.upload_generation_report: Enviar Informe de Generación

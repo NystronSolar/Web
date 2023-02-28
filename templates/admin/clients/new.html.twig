@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	Nystron Solar | {{ 'base.admin'|trans|raw }} - {{ 'base.forms.new'|trans|raw }} {{ 'base.client'|trans|raw }}
+	Nystron Solar |
+	{{ 'base.admin'|trans|raw }}
+	-
+	{{ 'base.forms.new'|trans|raw }}
+	{{ 'base.client'|trans|raw }}
 {% endblock %}
 
 {% block main %}
 	<main class="my-5 text-light d-flex flex-column align-items-center">
 		<h1 class="h3 fw-normal">{{ 'route.admin.clients.new.title'|trans|raw }}</h1>
-		<a href="{{ path('app.admin.clients.index') }}" class="mb-3">{{ 'route.admin.clients.new.back_clients_list'|trans|raw }}</a>
+		<a href="{{ path('app.admin.clients.index') }}" class="mb-3">{{ 'route.admin.clients.base.back_clients_list'|trans|raw }}</a>
 
 		<form action="{{ path('app.admin.clients.new') }}" method="post" class="w-50">
 			{% for error in errors %}
@@ -28,8 +32,8 @@
 				<label for="cpf">CPF</label>
 			</div>
 			<div class="form-floating mt-2 mb-2">
-				<input type="text" class="form-control" id="growattName" placeholder="{{ 'base.forms.growatt_name'|trans|raw }}" name="growattName" required>
-				<label for="growattName">{{ 'base.forms.growatt_name'|trans|raw }}</label>
+				<input type="text" class="form-control" id="growattName" placeholder="{{ 'base.growatt_name'|trans|raw }}" name="growattName" required>
+				<label for="growattName">{{ 'base.growatt_name'|trans|raw }}</label>
 			</div>
 			<div class="form-floating mt-2 mb-2">
 				<input type="password" class="form-control" id="password" placeholder="Password" name="password" required>

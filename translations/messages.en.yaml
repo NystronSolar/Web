@@ -7,10 +7,10 @@ base.contact: Contact
 base.login: Login
 base.clients: Clients
 base.client: Client
+base.roles: Roles
+base.growatt_name: Growatt Name
 base.forms.new: Novo
 base.forms.name: Name
-base.forms.roles: Roles
-base.forms.growatt_name: Growatt Name
 base.forms.password: Password
 base.electric_bills: Electric Bills
 base.generation_details: Generation Details
@@ -46,12 +46,15 @@ route.admin.index.features_list.control_clients: Control Clients
 route.admin.index.features_list.upload_report_generation: Upload an Report Generation
 route.admin.index.features_list.control_electric_bills: Control Electric Bills
 
+route.admin.clients.base.back_clients_list: Back to Clients List
+
 route.admin.clients.index.title: List of Clients
 route.admin.clients.index.back_admin_index: Back to Admin Index
 route.admin.clients.index.add_new_client: Add new Client
 
 route.admin.clients.new.title: Add a New Nystron Solar Client
-route.admin.clients.new.back_clients_list: Back to Clients List
 route.admin.clients.new.submit_button: Add Client
+
+route.admin.clients.show.delete_button: Delete Client
 
 route.admin.upload_generation_report: Upload Generation Report

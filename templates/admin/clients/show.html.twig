@@ -9,13 +9,13 @@
 {% block main %}
 	<main class="p-3 text-white">
 		<h1>{{ client.name }}</h1>
-		<a href="{{ path('app.admin.clients.index') }}">Back to Clients Index</a>
+		<a href="{{ path('app.admin.clients.index') }}">{{ 'route.admin.clients.base.back_clients_list'|trans|raw }}</a>
 		<p>
 			<span class="fw-bold">Id</span>:
 			<span class="fst-italic">{{ client.id }}</span>
 		</p>
 		<p>
-			<span class="fw-bold">Name</span>:
+			<span class="fw-bold">{{ 'base.name'|trans|raw }}</span>:
 			<span class="fst-italic">{{ client.name }}</span>
 		</p>
 		<p>
@@ -23,14 +23,14 @@
 			<span class="fst-italic">{{ client.email }}</span>
 		</p>
 		<p>
-			<span class="fw-bold">Roles</span>:
+			<span class="fw-bold">{{ 'base.roles'|trans|raw  }}</span>:
 			<span class="fst-italic">{{ client.getRolesToString() }}</span>
 		</p>
 		<p>
-			<span class="fw-bold">GrowattName</span>:
+			<span class="fw-bold">{{ 'base.growatt_name'|trans|raw  }}</span>:
 			<span class="fst-italic">{{ client.growattName }}</span>
 		</p>
 
-		<a class="btn btn-outline-danger" onclick="return confirm('Are you sure?')" href="{{ path('app.admin.clients.destroy', {client: client.id}) }}">Delete Client</a>
+		<a class="btn btn-outline-danger" onclick="return confirm('Are you sure?')" href="{{ path('app.admin.clients.destroy', {client: client.id}) }}">{{ 'route.admin.clients.show.delete_button'|trans|raw }}</a>
 	</main>
 {% endblock %}
