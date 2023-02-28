@@ -23,20 +23,34 @@
         </symbol>
     </svg>
     {% block header %}
-        <header class="pb-3 pt-4 px-4 border-bottom d-flex justify-content-between align-items-center">
-            <a href="/" class="d-flex align-items-center text-light text-decoration-none">
-                <img class="rounded me-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
-                <span class="fs-4">Nystron Solar</span>
-            </a>
-            {% if app.user %}
-                <a class="nav-link px-3" href="{{ path('app.security.logout') }}">Log out</a>
-            {% endif %}
-	</header>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between p-5">
+                <a href="/" class="d-flex align-items-center text-light text-decoration-none">
+                    <img class="rounded me-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
+                    <span class="fs-4 navbar-brand">Nystron Solar</span>
+                </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div>
+                        <div class="navbar-nav collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <a class="nav-link px-3" href="/">Home</a>
+                            {% if app.user %}
+                                <a class="nav-link px-3" href="{{ path('app.security.logout') }}">Log out</a>
+                                <a class="nav-link px-3" href="{{ path('app.dashboard.index') }}">Dashboard</a>
+                                {% if 'ROLE_ADMIN' in app.user.getroles %}
+                                    <a class="nav-link px-3" href="{{ path('app.admin.index') }}">Admin</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+            </nav>
+        </header>
     {% endblock %}
     {% block main %}{% endblock %}
     {% block footer %}
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 px-3 border-top border-secondary">
-            <p class="col-md-4 mb-0 text-secondary">© 2022 Company, Inc</p>
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 px-3 bg-body-tertiary">
+            <p class="col-md-4 mb-0 text-secondary">2023 Nystron Solar</p>
 
             <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <img class="rounded" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
