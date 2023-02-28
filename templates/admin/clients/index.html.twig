@@ -8,8 +8,8 @@
 
 {% block main %}
 	<main class="p-3">
-		<h1 class="text-white">All Clients</h1>
-		<a href="{{ path('app.admin.index') }}">Back to Admin Index</a>
+		<h1 class="text-white">{{ 'route.admin.clients.index.title'|trans|raw }}</h1>
+		<a href="{{ path('app.admin.index') }}">{{ 'route.admin.clients.index.back_admin_index'|trans|raw }}</a>
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success">
 				{{ message }}
@@ -19,10 +19,10 @@
 			<thead>
 				<tr>
 					<th scope="col">#</th>
-					<th scope="col">Name</th>
+					<th scope="col">{{ 'route.admin.clients.index.clients.name'|trans|raw }}</th>
 					<th scope="col">Email</th>
-					<th scope="col">Roles</th>
-					<th scope="col">Growatt Name</th>
+					<th scope="col">{{ 'route.admin.clients.index.clients.roles'|trans|raw }}</th>
+					<th scope="col">{{ 'route.admin.clients.index.clients.growatt_name'|trans|raw }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,6 +39,6 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<a href="{{ path('app.admin.clients.new') }}">Create a new Client</a>
+		<a href="{{ path('app.admin.clients.new') }}">{{ 'route.admin.clients.index.add_new_client'|trans|raw }}</a>
 	</main>
 {% endblock %}

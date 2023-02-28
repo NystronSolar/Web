@@ -37,9 +37,17 @@ route.dashboard.index.table.energy_generated: Energia Gerada
 route.dashboard.index.table.credit_scored: Crédito Gerado
 route.dashboard.index.table.bill_price: Preço da Conta
 
-route.admin.upload_generation_report: Enviar Relatório de Geração
-route.admin.index.title: Painel de Administrador
+route.admin.index.title: Painel do Administrador
 route.admin.index.title.text: Aqui, você pode gerenciar todo o sistema.
 route.admin.index.features_list.control_clients: Controle de Usuários
 route.admin.index.features_list.upload_report_generation: Enviar Relatório de Geração
 route.admin.index.features_list.control_electric_bills: Controle de Contas de Luz
+
+route.admin.clients.index.title: Lista dos Clientes
+route.admin.clients.index.back_admin_index: Voltar para o Painel do Administrador
+route.admin.clients.index.clients.name: Nome
+route.admin.clients.index.clients.roles: Habilidades
+route.admin.clients.index.clients.growatt_name: Nome na Growatt
+route.admin.clients.index.add_new_client: Adicionar um Novo Cliente
+
+route.admin.upload_generation_report: Enviar Relatório de Geração

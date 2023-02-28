@@ -37,9 +37,17 @@ route.dashboard.index.table.energy_generated: Energy Generated
 route.dashboard.index.table.credit_scored: Credit Scored
 route.dashboard.index.table.bill_price: Bill Price
 
-route.admin.upload_generation_report: Upload Generation Report
 route.admin.index.title: Admin Dashboard
 route.admin.index.title.text: Here, you can manage all the system.
 route.admin.index.features_list.control_clients: Control Clients
 route.admin.index.features_list.upload_report_generation: Upload an Report Generation
 route.admin.index.features_list.control_electric_bills: Control Electric Bills
+
+route.admin.clients.index.title: List of Clients
+route.admin.clients.index.back_admin_index: Back to Admin Index
+route.admin.clients.index.clients.name: Name
+route.admin.clients.index.clients.roles: Roles
+route.admin.clients.index.clients.growatt_name: Growatt Name
+route.admin.clients.index.add_new_client: Add new Client
+
+route.admin.upload_generation_report: Upload Generation Report
