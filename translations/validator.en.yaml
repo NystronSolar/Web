@@ -1,0 +1,2 @@
+invalid_cpf: The CPF "{{ string }}" is not a valid CPF.
+invalid_email: The Email "{{ string }}" is not a valid Email.

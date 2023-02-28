@@ -48,7 +48,7 @@ class ClientController extends AbstractController
             return $this->redirectToRoute('app.admin.clients.show', ['client' => $client->getId()]);
         }
 
-        $errors = $form->getErrors();
+        $errors = $form->getErrors(true);
 
         return $this->render('admin/clients/new.html.twig', [
             'form' => $form,
