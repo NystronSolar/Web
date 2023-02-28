@@ -4,13 +4,13 @@
 	Nystron Solar |
 	{{ 'base.admin'|trans|raw }}
 	-
-	{{ 'route.admin.upload_generation_report'|trans|raw }}
+	{{ 'route.admin.upload.reports.generation'|trans|raw }}
 {% endblock %}
 
 {% block main %}
 	<main class="my-5 text-light d-flex flex-column align-items-center">
-		<h1>Upload Generation Report</h1>
-		<a href="{{ path('app.admin.index') }}" class="mb-3">Back to Admin Index</a>
+		<h1>{{ 'route.admin.upload.reports.generation.title'|trans|raw }}</h1>
+		<a href="{{ path('app.admin.index') }}" class="mb-3">{{ 'route.admin.base.back_admin_index'|trans|raw }}</a>
 
 		<form action="{{ path('app.admin.uploads.reports.generation') }}" method="post" enctype="multipart/form-data" class="w-50">
 			{% for error in errors %}
@@ -28,7 +28,7 @@
 			</div>
 			<input type="hidden" name="token" value="{{ csrf_token('report-generation') }}"/>
 			<div class="mb-3"></div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">Submit!</button>
+			<button class="w-100 btn btn-lg btn-primary" type="submit">{{ 'route.admin.upload.reports.generation.submit_button'|trans|raw }}</button>
 		</form>
 	</main>
 {% endblock %}

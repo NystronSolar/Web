@@ -40,6 +40,8 @@ route.dashboard.index.table.energy_generated: Energy Generated
 route.dashboard.index.table.credit_scored: Credit Scored
 route.dashboard.index.table.bill_price: Bill Price
 
+route.admin.base.back_admin_index: Back to Admin Index
+
 route.admin.index.title: Admin Dashboard
 route.admin.index.title.text: Here, you can manage all the system.
 route.admin.index.features_list.control_clients: Control Clients
@@ -49,7 +51,6 @@ route.admin.index.features_list.control_electric_bills: Control Electric Bills
 route.admin.clients.base.back_clients_list: Back to Clients List
 
 route.admin.clients.index.title: List of Clients
-route.admin.clients.index.back_admin_index: Back to Admin Index
 route.admin.clients.index.add_new_client: Add new Client
 
 route.admin.clients.new.title: Add a New Nystron Solar Client
@@ -57,4 +58,6 @@ route.admin.clients.new.submit_button: Add Client
 
 route.admin.clients.show.delete_button: Delete Client
 
-route.admin.upload_generation_report: Upload Generation Report
+route.admin.upload.reports.generation: Upload Generation Report
+route.admin.upload.reports.generation.title: Upload an Generation Report
+route.admin.upload.reports.generation.submit_button: Upload!
