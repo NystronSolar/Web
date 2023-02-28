@@ -9,15 +9,18 @@ base.clients: Clientes
 base.client: Cliente
 base.new: Nuevo
 base.password: Contraseña
+base.electric_bills: Facturas de Electricidad
+base.generation_details: Detalles de Generación
+base.generation: Detalles de Generación
 
 route.admin.upload_generation_report: Cargar Informe de Generación
 
-route.index.subtitle: Nosotros somos %open_bold%Nystron Solar%close_bold%. Empresa de Energia Solar con sede en Quaraí - Rio Grande do Sul - Brasil
+route.index.title.text: Nosotros somos %open_bold%Nystron Solar%close_bold%. Empresa de Energia Solar con sede en Quaraí - Rio Grande do Sul - Brasil
 route.index.buttons.contact: Entrar en Contacto
 route.index.buttons.i_am_client: Ya soy Cliente
 
 route.credits.title: Créditos
-route.credits.subtitle: Esta página está diseñada para dar el debido crédito a los íconos y bibliotecas de software que nos ayudaron a construir el sistema Nystron Solar.
+route.credits.title.text: Esta página está diseñada para dar el debido crédito a los íconos y bibliotecas de software que nos ayudaron a construir el sistema Nystron Solar.
 route.credits.by: Por
 route.credits.from: En
 route.credits.icons.title: Iconos
@@ -27,3 +30,11 @@ route.credits.icons.solar_powered_home: Casa con Energía Solar
 
 route.security.login.title: Entrar en Nystron Solar
 route.security.login.sign_in_button: Entrar
+
+route.dashboard.index.title.text: Bienvenido a tu panel de control. Aquí puede acceder a todos los datos de su instalación. Consulte el menú de la izquierda para obtener más detalles.
+route.dashboard.index.admin_subtitle: ¡Eres un administrador! 😎
+route.dashboard.index.admin_subtitle.text: ¡Consulte su %open_admin_link%Página de Administración%close_admin_link%!
+route.dashboard.index.table.month: Mes
+route.dashboard.index.table.energy_generated: Energía generada
+route.dashboard.index.table.credit_scored: Credit Scored
+route.dashboard.index.table.bill_price: Bill Price
