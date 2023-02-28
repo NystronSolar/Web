@@ -4,13 +4,12 @@
 	Nystron Solar | Info - Credits
 {% endblock %}
 
-
 {% block main %}
 	<main class="container py-4">
 		<div class="p-5 mb-4 rounded-3">
 			<div class="container-fluid py-5">
-				<h1 class="display-5 fw-bold">Credits</h1>
-				<p class="fs-4">This page is designed to give proper credit to icons and software libraries that helped us build the Nystron Solar system.</p>
+				<h1 class="display-5 fw-bold">{{ 'route.credits.title'|trans|raw }}</h1>
+				<p class="fs-4">{{ 'route.credits.subtitle'|trans|raw }}</p>
 			</div>
 		</div>
 
@@ -23,11 +22,11 @@
 							<li class="list-group-item-light list-group-item d-flex justify-content-between align-items-start">
 								<div class="ms-2 me-auto">
 									<div class="fw-bold">
-										<a href="{{ credit.Link }}" target="_blank" class="link-secondary">{{ credit.Title }}</a>
+										<a href="{{ credit.Link }}" target="_blank" class="link-secondary">{{ credit.Title|trans|raw }}</a>
 									</div>
-									<p class="mb-0 opacity-75">By
+									<p class="mb-0 opacity-75">{{ 'route.credits.by'|trans|raw }}
 										<a href="{{ credit.AuthorLink }}" target="_blank">{{ credit.Author }}</a>
-										From
+										{{  'route.credits.from'|trans|raw  }}
 										<a href="{{ credit.CorporationLink }}" target="_blank">{{ credit.Corporation }}</a>
 									</p>
 								</div>

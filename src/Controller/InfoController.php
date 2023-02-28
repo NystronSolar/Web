@@ -17,7 +17,7 @@ class InfoController extends AbstractController
             'Icons' => [
                 [
                     'Link' => 'https://thenounproject.com/icon/home-1560062/',
-                    'Title' => 'Home',
+                    'Title' => 'route.credits.icons.home',
                     'AuthorLink' => 'https://thenounproject.com/il.capitano/',
                     'Author' => 'il Capitano',
                     'CorporationLink' => 'https://thenounproject.com/',
@@ -25,7 +25,7 @@ class InfoController extends AbstractController
                 ],
                 [
                     'Link' => 'https://thenounproject.com/icon/electric-bill-2864536/',
-                    'Title' => 'Electric Bill',
+                    'Title' => 'route.credits.icons.electric_bill',
                     'AuthorLink' => 'https://thenounproject.com/auliausu/',
                     'Author' => 'Aulia Rahman',
                     'CorporationLink' => 'https://thenounproject.com/',
@@ -33,7 +33,7 @@ class InfoController extends AbstractController
                 ],
                 [
                     'Link' => 'https://thenounproject.com/icon/solar-powered-home-1271326/',
-                    'Title' => 'Solar Powered Home',
+                    'Title' => 'route.credits.icons.solar_powered_home',
                     'AuthorLink' => 'https://thenounproject.com/symbolon/',
                     'Author' => 'Symbolon',
                     'CorporationLink' => 'https://thenounproject.com/',
