@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ClientRepository;
 use App\Validator as AppAssert;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -41,6 +43,14 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     private ?string $growattName = null;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: DayGeneration::class)]
+    private Collection $dayGenerations;
+
+    public function __construct()
+    {
+        $this->dayGenerations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -171,5 +181,35 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
             'Password' => $this->getPassword(),
             'GrowattName' => $this->getGrowattName(),
         ];
+    }
+
+    /**
+     * @return Collection<int, DayGeneration>
+     */
+    public function getDayGenerations(): Collection
+    {
+        return $this->dayGenerations;
+    }
+
+    public function addDayGeneration(DayGeneration $dayGeneration): self
+    {
+        if (!$this->dayGenerations->contains($dayGeneration)) {
+            $this->dayGenerations->add($dayGeneration);
+            $dayGeneration->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDayGeneration(DayGeneration $dayGeneration): self
+    {
+        if ($this->dayGenerations->removeElement($dayGeneration)) {
+            // set the owning side to null (unless already changed)
+            if ($dayGeneration->getClient() === $this) {
+                $dayGeneration->setClient(null);
+            }
+        }
+
+        return $this;
     }
 }
