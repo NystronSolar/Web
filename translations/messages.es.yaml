@@ -8,8 +8,9 @@ base.login: Iniciar Sesión
 base.clients: Clientes
 base.client: Cliente
 base.new: Nuevo
+base.password: Contraseña
 
-admin.upload_generation_report: Cargar Informe de Generación
+route.admin.upload_generation_report: Cargar Informe de Generación
 
 route.index.subtitle: Nosotros somos %open_bold%Nystron Solar%close_bold%. Empresa de Energia Solar con sede en Quaraí - Rio Grande do Sul - Brasil
 route.index.buttons.contact: Entrar en Contacto
@@ -23,3 +24,6 @@ route.credits.icons.title: Iconos
 route.credits.icons.home: Hogar
 route.credits.icons.electric_bill: Factura de electricidad
 route.credits.icons.solar_powered_home: Casa con Energía Solar
+
+route.security.login.title: Entrar en Nystron Solar
+route.security.login.sign_in_button: Entrar

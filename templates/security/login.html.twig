@@ -7,7 +7,7 @@
 {% block main %}
 	<main class="my-5 text-light d-flex flex-column align-items-center">
 		<img class="rounded mb-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="130" height="112">
-		<h1 class="h3 mb-3 fw-normal">Sign in to Nystron Solar</h1>
+		<h1 class="h3 mb-3 fw-normal">{{ 'route.security.login.title'|trans|raw }}</h1>
 
 		<form action="{{ path('app.security.login') }}" method="post" class="w-50">
 			{% if error %}
@@ -21,12 +21,12 @@
 				<label for="floatingInput">Email</label>
 			</div>
 			<div class="form-floating">
-				<input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" autocomplete="password" required>
-				<label for="floatingPassword">Password</label>
+				<input type="password" class="form-control" id="floatingPassword" placeholder=" {{ 'base.password'|trans|raw }} " name="password" autocomplete="password" required>
+				<label for="floatingPassword"> {{ 'base.password'|trans|raw }} </label>
 			</div>
 			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
 			<div class="mb-3"></div>
-			<button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+			<button class="w-100 btn btn-lg btn-primary" type="submit">{{ 'route.security.login.sign_in_button'|trans|raw }}</button>
 		</form>
 	</main>
 {% endblock %}
