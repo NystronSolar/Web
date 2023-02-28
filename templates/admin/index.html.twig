@@ -8,12 +8,12 @@
 
 {% block main %}
 	<main class="p-3">
-		<h1 class="text-white">Admin Dashboard</h1>
-		<p>Here, you can manage all the system.</p>
+		<h1 class="text-white">{{ 'route.admin.index.title'|trans|raw }}</h1>
+		<p>{{ 'route.admin.index.title.text'|trans|raw }}</p>
 		<div class="list-group list-group-dark">
-			<a href="{{ path('app.admin.clients.index') }}" class="list-group-item list-group-item-action">Clients</a>
-			<a href="{{ path('app.admin.uploads.reports.generation') }}" class="list-group-item list-group-item-action">Upload an Report Generation</a>
-			<a class="list-group-item list-group-item-action disabled">🚧 Clients Dashboard | We don't have this feature yet. 🚧</a>
+			<a href="{{ path('app.admin.clients.index') }}" class="list-group-item list-group-item-action">{{ 'route.admin.index.features_list.control_clients'|trans|raw }}</a>
+			<a href="{{ path('app.admin.uploads.reports.generation') }}" class="list-group-item list-group-item-action">{{ 'route.admin.index.features_list.upload_report_generation'|trans|raw }}</a>
+			<a class="list-group-item list-group-item-action disabled">🚧 {{ 'route.admin.index.features_list.control_electric_bills'|trans|raw }} 🚧</a>
 		</div>
 	</main>
 {% endblock %}

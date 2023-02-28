@@ -13,8 +13,6 @@ base.electric_bills: Facturas de Electricidad
 base.generation_details: Detalles de Generación
 base.generation: Detalles de Generación
 
-route.admin.upload_generation_report: Cargar Informe de Generación
-
 route.index.title.text: Nosotros somos %open_bold%Nystron Solar%close_bold%. Empresa de Energia Solar con sede en Quaraí - Rio Grande do Sul - Brasil
 route.index.buttons.contact: Entrar en Contacto
 route.index.buttons.i_am_client: Ya soy Cliente
@@ -38,3 +36,10 @@ route.dashboard.index.table.month: Mes
 route.dashboard.index.table.energy_generated: Energía generada
 route.dashboard.index.table.credit_scored: Credit Scored
 route.dashboard.index.table.bill_price: Bill Price
+
+route.admin.upload_generation_report: Enviar Informe de Generación
+route.admin.index.title: Panel Administrador
+route.admin.index.title.text: Aquí puede administrar todo el sistema.
+route.admin.index.features_list.control_clients: Control de Usuario
+route.admin.index.features_list.upload_report_generation: Enviar Informe de Generación
+route.admin.index.features_list.control_electric_bills: Control de Cuentas de Luz

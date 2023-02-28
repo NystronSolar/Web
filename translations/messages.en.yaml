@@ -13,8 +13,6 @@ base.electric_bills: Electric Bills
 base.generation_details: Generation Details
 base.generation: Generation
 
-route.admin.upload_generation_report: Upload Generation Report
-
 route.index.title.text: We are the %open_bold%Nystron Solar%close_bold%. A Solar Energy company based in Quaraí - Rio Grande do Sul - Brazil
 route.index.buttons.contact: Get in touch
 route.index.buttons.i_am_client: I'm already a client
@@ -38,3 +36,10 @@ route.dashboard.index.table.month: Month
 route.dashboard.index.table.energy_generated: Energy Generated
 route.dashboard.index.table.credit_scored: Credit Scored
 route.dashboard.index.table.bill_price: Bill Price
+
+route.admin.upload_generation_report: Upload Generation Report
+route.admin.index.title: Admin Dashboard
+route.admin.index.title.text: Here, you can manage all the system.
+route.admin.index.features_list.control_clients: Control Clients
+route.admin.index.features_list.upload_report_generation: Upload an Report Generation
+route.admin.index.features_list.control_electric_bills: Control Electric Bills
