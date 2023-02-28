@@ -14,7 +14,7 @@
     {% block header %}
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary d-flex justify-content-between p-5">
-                <a href="/" class="d-flex align-items-center text-light text-decoration-none">
+                <a href="{{ path('app.index') }}" class="d-flex align-items-center text-light text-decoration-none">
                     <img class="rounded me-4" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
                     <span class="fs-4 navbar-brand">Nystron Solar</span>
                 </a>
@@ -23,7 +23,7 @@
                     </button>
                     <div>
                         <div class="navbar-nav collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <a class="nav-link px-3" href="/">{{ 'base.homepage'|trans|raw }}</a>
+                            <a class="nav-link px-3" href="{{ path('app.index') }}">{{ 'base.homepage'|trans|raw }}</a>
                             {% if app.user %}
                                 <a class="nav-link px-3" href="{{ path('app.security.logout') }}">{{ 'base.logout'|trans|raw }}</a>
                                 <a class="nav-link px-3" href="{{ path('app.dashboard.index') }}">{{ 'base.dashboard'|trans|raw }}</a>
@@ -52,7 +52,7 @@
         <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 px-3 bg-body-tertiary">
             <p class="col-md-4 mb-0 text-secondary">2023 Nystron Solar</p>
 
-            <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <a href="{{ path('app.index') }}" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <img class="rounded" src="/assets/images/nystron-solar-logo.jpg" alt="" width="65" height="56">
             </a>
 

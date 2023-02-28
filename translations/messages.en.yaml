@@ -4,6 +4,12 @@ base.dashboard: Dashboard
 base.admin: Admin 
 base.credits: Credits
 base.contact: Contact
+base.login: Login
+base.clients: Clients
+base.client: Client
+base.new: Novo
+
+admin.upload_generation_report: Upload Generation Report
 
 route.index.subtitle: We are the %open_bold%Nystron Solar%close_bold%. A Solar Energy company based in Quaraí - Rio Grande do Sul - Brazil
 route.index.buttons.contact: Get in touch

@@ -3,8 +3,7 @@
 {% block head %}{% endblock %}
 
 {% block title %}
-	Nystron Solar | Admin - Clients - Show
-	{{ client.name }}
+	Nystron Solar | {{ 'base.admin'|trans|raw }} - {{ 'base.client'|trans|raw }} {{ client.name }}
 {% endblock %}
 
 {% block main %}
