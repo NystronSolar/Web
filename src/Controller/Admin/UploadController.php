@@ -2,8 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\DayGeneration;
 use App\Form\ReportGenerationType;
 use App\Repository\ClientRepository;
+use App\Repository\DayGenerationRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use NystronSolar\GrowattSpreadsheet\Reader\ReaderFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -16,8 +19,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class UploadController extends AbstractController
 {
     #[Route(path: '/reports/generation', name: 'reports.generation', methods: ['GET', 'POST'])]
-    public function generationReport(Request $request, ClientRepository $clientRepository): Response
+    public function generationReport(Request $request, ClientRepository $clientRepository, DayGenerationRepository $dayGenerationRepository, ManagerRegistry $doctrine): Response
     {
+        $entityManager = $doctrine->getManager();
+
         $form = $this->createForm(ReportGenerationType::class);
         $form->handleRequest($request);
 
@@ -39,10 +44,25 @@ class UploadController extends AbstractController
                 $spreadsheetClient->getUserAccountName();
 
                 $userAccountName = $spreadsheetClient->getUserAccountName();
-                if (is_null($clientRepository->findOneBy(['growattName' => $userAccountName]))) {
+                $client = $clientRepository->findOneBy(['growattName' => $userAccountName]);
+                if (is_null($client)) {
                     $this->addFlash('error', sprintf('Client %s Not Founded in Database.', $userAccountName));
 
                     return $this->redirectToRoute('app.admin.uploads.reports.generation');
+                }
+
+                foreach ($spreadsheetClient->getGenerationDays() as $generationDay) {
+                    $dayGeneration = new DayGeneration();
+
+                    $dayGeneration->setGeneration($generationDay->getGeneration());
+                    $dayGeneration->setHours($generationDay->getHours());
+                    $dayGeneration->setDate($generationDay->getDate());
+
+                    $client->addDayGeneration($dayGeneration);
+
+                    $dayGenerationRepository->save($dayGeneration);
+
+                    $entityManager->flush();
                 }
             }
 

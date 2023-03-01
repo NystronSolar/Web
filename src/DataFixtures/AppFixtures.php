@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\DayGeneration;
+use App\Repository\DayGenerationRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
@@ -137,12 +138,14 @@ class AppFixtures extends Fixture
             $dayGenerations = $this->createFakerMonthDayGeneration(new \DateTime());
         }
 
+        /**
+         * @var DayGenerationRepository $dayGenerationRepository
+         */
         $dayGenerationRepository = $this->manager->getRepository(DayGeneration::class);
 
         foreach ($dayGenerations as $dayGeneration) {
             $client->addDayGeneration($dayGeneration);
 
-            /* @var \App\Repository\DayGenerationRepository $dayGenerationRepository */
             $dayGenerationRepository->save($dayGeneration);
 
             $this->manager->flush();
