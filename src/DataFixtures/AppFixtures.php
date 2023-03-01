@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Client;
+use App\Entity\DayGeneration;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
@@ -14,6 +15,8 @@ class AppFixtures extends Fixture
     private Faker $faker;
 
     private UserPasswordHasherInterface $passwordHasher;
+
+    private ObjectManager $manager;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -29,6 +32,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $this->manager = $manager;
+
         $defaultAdmin = $this->createOneClient(
             'Admin',
             'admin@user.com',
@@ -94,14 +99,6 @@ class AppFixtures extends Fixture
             ['ROLE_USER'],
             'Steven'
         );
-
-        /** @var \App\Repository\ClientRepository $clientRepository */
-        $clientRepository = $manager->getRepository(Client::class);
-        foreach ($clients as $client) {
-            $clientRepository->save($client);
-        }
-
-        $manager->flush();
     }
 
     public function hashPassword(Client $client, string $password): string
@@ -111,7 +108,10 @@ class AppFixtures extends Fixture
         return $passwordHasher->hashPassword($client, $password);
     }
 
-    public function createOneClient(string $name, string $email, string $cpf, string $growattName, array $roles, string $password, bool $hashPassword = true): Client
+    /**
+     * @param array<int, DayGeneration> $dayGenerations
+     */
+    public function createOneClient(string $name, string $email, string $cpf, string $growattName, array $roles, string $password, bool $hashPassword = true, array $dayGenerations = null): Client
     {
         $client = new Client();
 
@@ -126,6 +126,27 @@ class AppFixtures extends Fixture
         }
 
         $client->setPassword($password);
+
+        /** @var \App\Repository\ClientRepository $clientRepository */
+        $clientRepository = $this->manager->getRepository(Client::class);
+        $clientRepository->save($client);
+
+        $this->manager->flush();
+
+        if (is_null($dayGenerations)) {
+            $dayGenerations = $this->createFakerMonthDayGeneration(new \DateTime());
+        }
+
+        $dayGenerationRepository = $this->manager->getRepository(DayGeneration::class);
+
+        foreach ($dayGenerations as $dayGeneration) {
+            $client->addDayGeneration($dayGeneration);
+
+            /* @var \App\Repository\DayGenerationRepository $dayGenerationRepository */
+            $dayGenerationRepository->save($dayGeneration);
+
+            $this->manager->flush();
+        }
 
         return $client;
     }
@@ -156,5 +177,49 @@ class AppFixtures extends Fixture
         );
 
         return $client;
+    }
+
+    /**
+     * @param array<int, DayGeneration> $dayGenerations
+     */
+    public function createOneDayGeneration(string $generation, string $hours, \DateTime $date): DayGeneration
+    {
+        $dayGeneration = new DayGeneration();
+
+        $dayGeneration->setGeneration($generation);
+        $dayGeneration->setHours($hours);
+        $dayGeneration->setDate($date);
+
+        return $dayGeneration;
+    }
+
+    /**
+     * @return DayGeneration[]
+     */
+    public function createFakerMonthDayGeneration(\DateTime $monthDate = new \DateTime()): array
+    {
+        $year = date_format($monthDate, 'Y');
+        $month = date_format($monthDate, 'm');
+        $daysInMonth = date_format($monthDate, 't');
+
+        $dayGenerations = [];
+
+        for ($i = 1; $i <= $daysInMonth; ++$i) {
+            $date = \DateTime::createFromFormat('d/m/Y', "$i/$month/$year");
+            $dayGenerations[] = $this->createOneFakerDayGeneration($date);
+        }
+
+        return $dayGenerations;
+    }
+
+    public function createOneFakerDayGeneration(\DateTime $date): DayGeneration
+    {
+        $dayGeneration = $this->createOneDayGeneration(
+            (string) $this->getFaker()->randomFloat(1, 5, 20),
+            (string) $this->getFaker()->randomFloat(1, 3, 14),
+            $date
+        );
+
+        return $dayGeneration;
     }
 }
