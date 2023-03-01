@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Client;
 use App\Entity\DayGeneration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,19 +40,35 @@ class DayGenerationRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * @return DayGeneration[]|null
+     */
+    public function findGenerationBetweenDates(\DateTime $startDate, \DateTime $endDate, Client $client = null): ?array
+    {
+        $startDateStr = date_format($startDate, 'Y-m-d');
+        $endDateStr = date_format($endDate, 'Y-m-d');
+
+        $queryBuilder = $this->createQueryBuilder('d')
+            ->where('d.date BETWEEN :startDate AND :endDate')
+            ->setParameters([
+                'startDate' => $startDateStr,
+                'endDate' => $endDateStr,
+            ])
+            ->orderBy('d.date', 'ASC')
+        ;
+
+        if (!is_null($client?->getId())) {
+            $queryBuilder->andWhere('d.client = '.$client->getId());
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return DayGeneration[] Returns an array of DayGeneration objects
 //     */
 //    public function findByExampleField($value): array
 //    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
 //    }
 
 //    public function findOneBySomeField($value): ?DayGeneration

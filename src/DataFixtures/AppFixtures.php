@@ -62,7 +62,9 @@ class AppFixtures extends Fixture
             $this->getFaker()->cpf(false),
             'Tim',
             ['ROLE_USER'],
-            'Tim'
+            'Tim',
+            true,
+            12
         );
 
         $clients[] = $this->createOneClient(
@@ -112,8 +114,9 @@ class AppFixtures extends Fixture
     /**
      * @param array<int, DayGeneration> $dayGenerations
      */
-    public function createOneClient(string $name, string $email, string $cpf, string $growattName, array $roles, string $password, bool $hashPassword = true, array $dayGenerations = null): Client
+    public function createOneClient(string $name, string $email, string $cpf, string $growattName, array $roles, string $password, bool $hashPassword = true, int $months = 1): Client
     {
+        $months = $months > 12 ? 12 : $months;
         $client = new Client();
 
         $client->setName($name);
@@ -130,25 +133,26 @@ class AppFixtures extends Fixture
 
         /** @var \App\Repository\ClientRepository $clientRepository */
         $clientRepository = $this->manager->getRepository(Client::class);
+
+        /** @var DayGenerationRepository $dayGenerationRepository */
+        $dayGenerationRepository = $this->manager->getRepository(DayGeneration::class);
+
         $clientRepository->save($client);
 
         $this->manager->flush();
 
-        if (is_null($dayGenerations)) {
-            $dayGenerations = $this->createFakerMonthDayGeneration(new \DateTime());
-        }
+        for ($i = 1; $i <= $months; ++$i) {
+            $month = strtotime("-$i month");
+            $month = date('m/Y', $month);
+            $dayGenerations = $this->createFakerMonthDayGeneration(\DateTime::createFromFormat('m/Y', $month));
 
-        /**
-         * @var DayGenerationRepository $dayGenerationRepository
-         */
-        $dayGenerationRepository = $this->manager->getRepository(DayGeneration::class);
+            foreach ($dayGenerations as $dayGeneration) {
+                $client->addDayGeneration($dayGeneration);
 
-        foreach ($dayGenerations as $dayGeneration) {
-            $client->addDayGeneration($dayGeneration);
+                $dayGenerationRepository->save($dayGeneration);
 
-            $dayGenerationRepository->save($dayGeneration);
-
-            $this->manager->flush();
+                $this->manager->flush();
+            }
         }
 
         return $client;

@@ -43,84 +43,23 @@
 					<thead>
 						<tr>
 							<th scope="col">{{'route.dashboard.index.table.month'|trans|raw}}</th>
-							<th scope="col">{{'route.dashboard.index.table.energy_generated'|trans|raw}} (kWh)</th>
-							<th scope="col">{{'route.dashboard.index.table.credit_scored'|trans|raw}} (kWh)</th>
-							<th scope="col">{{'route.dashboard.index.table.bill_price'|trans|raw}} (R$)</th>
+							<th scope="col">{{'route.dashboard.index.table.energy_generated'|trans|raw}}
+								(kWh)</th>
+							<th scope="col">{{'route.dashboard.index.table.hours_generated'|trans|raw}}</th>
+							<th scope="col">{{'route.dashboard.index.table.bill_price'|trans|raw}}
+								(R$)</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>01/2023</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>12/2022</td>
-							<td>290 kWh</td>
-							<td>105 kWh</td>
-							<td>R$27,00</td>
-						</tr>
-						<tr>
-							<td>11/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>10/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>09/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>08/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>07/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>06/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>05/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>04/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>03/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
-						<tr>
-							<td>02/2022</td>
-							<td>300 kWh</td>
-							<td>100 kWh</td>
-							<td>R$30,00</td>
-						</tr>
+						{% for month in summary %}
+							<tr>
+								<td>{{ month.date.month }}/{{ month.date.year }}</td>
+								<td>{{ month.generation }}
+									kWh</td>
+								<td>{{ month.hours }}</td>
+								<td>R$30,00</td>
+							</tr>
+						{% endfor %}
 					</tbody>
 				</table>
 			</div>

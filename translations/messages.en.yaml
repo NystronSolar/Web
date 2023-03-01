@@ -37,7 +37,7 @@ route.dashboard.index.admin_subtitle: You are an Admin! 😎
 route.dashboard.index.admin_subtitle.text: Check out your %open_admin_link%Admin Page%close_admin_link%!
 route.dashboard.index.table.month: Month
 route.dashboard.index.table.energy_generated: Energy Generated
-route.dashboard.index.table.credit_scored: Credit Scored
+route.dashboard.index.table.hours_generated: Hours Generated
 route.dashboard.index.table.bill_price: Bill Price
 
 route.admin.base.back_admin_index: Back to Admin Index

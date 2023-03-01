@@ -37,7 +37,7 @@ route.dashboard.index.admin_subtitle: ¡Eres un administrador! 😎
 route.dashboard.index.admin_subtitle.text: ¡Consulte su %open_admin_link%Panel de Administración%close_admin_link%!
 route.dashboard.index.table.month: Mes
 route.dashboard.index.table.energy_generated: Energía generada
-route.dashboard.index.table.credit_scored: Credit Scored
+route.dashboard.index.table.hours_generated: Horas de Generación
 route.dashboard.index.table.bill_price: Bill Price
 
 route.admin.base.back_admin_index: Volver al Panel de Administración
