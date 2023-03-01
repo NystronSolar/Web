@@ -44,6 +44,7 @@ class InfoController extends AbstractController
 
         return $this->render('info/credits.html.twig', ['credits' => $credits]);
     }
+
     #[Route(path: '/contact', name: 'contact', methods: 'GET')]
     public function contact(): Response
     {

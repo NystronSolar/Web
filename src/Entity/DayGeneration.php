@@ -24,6 +24,9 @@ class DayGeneration
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
+    #[ORM\Column(length: 5)]
+    private ?string $hours = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -61,6 +64,18 @@ class DayGeneration
     public function setClient(?Client $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getHours(): ?string
+    {
+        return $this->hours;
+    }
+
+    public function setHours(string $hours): self
+    {
+        $this->hours = $hours;
 
         return $this;
     }

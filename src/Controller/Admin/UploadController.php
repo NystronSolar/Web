@@ -25,15 +25,15 @@ class UploadController extends AbstractController
             /** @var UploadedFile $report */
             $report = $form->get('report')->getData();
 
-            $reportFolder = $this->getParameter('kernel.project_dir') . '/var/uploads/';
+            $reportFolder = $this->getParameter('kernel.project_dir').'/var/uploads/';
             $reportFileName = $report->getClientOriginalName();
             $report->move($reportFolder, $reportFileName);
 
-            $reader = ReaderFactory::fromFile($reportFolder . $reportFileName);
+            $reader = ReaderFactory::fromFile($reportFolder.$reportFileName);
             $reportSpreadsheet = $reader->search();
 
             $filesystem = new Filesystem();
-            $filesystem->remove($reportFolder . $reportFileName);
+            $filesystem->remove($reportFolder.$reportFileName);
 
             foreach ($reportSpreadsheet->getClients() as $spreadsheetClient) {
                 $spreadsheetClient->getUserAccountName();
@@ -47,7 +47,7 @@ class UploadController extends AbstractController
             }
 
             $filesystem = new Filesystem();
-            $filesystem->remove($reportFolder . $reportFileName);
+            $filesystem->remove($reportFolder.$reportFileName);
 
             dd($reportSpreadsheet);
 
