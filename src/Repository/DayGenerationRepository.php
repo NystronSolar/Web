@@ -50,11 +50,11 @@ class DayGenerationRepository extends ServiceEntityRepository
 
         $queryBuilder = $this->createQueryBuilder('d')
             ->where('d.date BETWEEN :startDate AND :endDate')
+            ->orderBy('d.date', 'DESC')
             ->setParameters([
                 'startDate' => $startDateStr,
                 'endDate' => $endDateStr,
             ])
-            ->orderBy('d.date', 'ASC')
         ;
 
         if (!is_null($client?->getId())) {

@@ -21,28 +21,31 @@ class DashboardController extends AbstractController
         $client = $this->getUser();
         $isAdmin = array_search('ROLE_ADMIN', $client->getRoles()) ? true : false;
 
-        $start = new \DateTime('-1 year');
-        $start = \DateTime::createFromFormat('Y-m-d', $start->format('Y-m-01'));
+        $start = new \DateTime('-13 months');
+        $start->setDate((int) $start->format('Y'), (int) $start->format('m'), 1);
+        $start = \DateTime::createFromFormat('Y-m-d', $start->format('Y-m-d'));
 
-        $end = new \DateTime();
-        $end = \DateTime::createFromFormat('Y-m-d', $end->format('Y-m-01'));
+        $end = new \DateTime('-1 month');
+        $end->setDate((int) $end->format('Y'), (int) $end->format('m'), (int) $end->format('t'));
+        $end = \DateTime::createFromFormat('Y-m-d', $end->format('Y-m-d'));
 
         $fullSummary = [];
         $generation = '0';
         $hours = '0';
+        $daysCounter = 0;
 
         /** @var $yearGenerations DayGeneration[] */
         $yearGenerations = $dayGenerationRepository->findGenerationBetweenDates($start, $end, $client);
         foreach ($yearGenerations as $dayGeneration) {
+            $daysCounter++;
+
             $generation = bcadd($generation, $dayGeneration->getGeneration(), 1);
             $hours = bcadd($hours, $dayGeneration->getHours(), 1);
 
             $dayGenerationDate = $dayGeneration->getDate();
             $daysInMonth = $dayGenerationDate->format('t');
 
-            $day = $dayGenerationDate->format('d');
-
-            if ($day === $daysInMonth) {
+            if ($daysInMonth == $daysCounter) {
                 $month = $dayGenerationDate->format('m');
                 $year = $dayGenerationDate->format('Y');
 
@@ -55,10 +58,13 @@ class DashboardController extends AbstractController
                     'hours' => $hours,
                 ];
 
+                $daysCounter = 0;
                 $generation = '';
                 $hours = '';
             }
         }
+
+        $fullSummary = array_reverse($fullSummary);
 
         return $this->render('dashboard/index.html.twig', ['is_admin' => $isAdmin, 'summary' => $fullSummary]);
     }
