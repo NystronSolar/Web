@@ -37,19 +37,20 @@ class ClientFactoryTest extends TestCase
 
         $this->passwordHasher = $passwordHasher;
         $this->clientFactory = new ClientFactory($this->passwordHasher);
-        $this->defaultClient['DayGenerations'] = [(new DayGeneration())->setDate(new \DateTimeImmutable)->setGeneration('30')->setHours('50')];
+        $this->defaultClient['DayGenerations'] = [(new DayGeneration())->setDate(new \DateTimeImmutable())->setGeneration('30')->setHours('50')];
     }
 
     /**
-     * Run $clientFactory->createOne() or $clientFactory->createOneByArray()
+     * Run $clientFactory->createOne() or $clientFactory->createOneByArray().
      *
-     * @param array $data The data to be created
-     * @param string $by If should be the method with Parameters or Array (Possible Values: "Array" for createOneByArray() method, and any other string will be executed by createOne() method (With Method Parameters))
+     * @param array  $data The data to be created
+     * @param string $by   If should be the method with Parameters or Array (Possible Values: "Array" for createOneByArray() method, and any other string will be executed by createOne() method (With Method Parameters))
+     *
      * @return Client
      */
     private function createOneClient(array $data, string $by = '', bool $hashPassword = true): Client|false
     {
-        if($by === 'Array') {
+        if ('Array' === $by) {
             return $this->clientFactory->createOneByArray($data, $hashPassword);
         }
 
@@ -154,7 +155,7 @@ class ClientFactoryTest extends TestCase
     public function testByArrayWrongKeys(): void
     {
         // Arrange
-        $data = ['Wrong Keys' => true, "Is this Valid?" => false];
+        $data = ['Wrong Keys' => true, 'Is this Valid?' => false];
 
         // Act
         $client = $this->createOneClient($data, by: 'Array');

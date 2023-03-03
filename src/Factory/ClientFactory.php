@@ -29,10 +29,10 @@ class ClientFactory
 
     public static function assertDataHasAllKeys(array $data, array $properties = []): bool
     {
-        $properties = $properties === [] ? static::getRequiredProperties() : $properties;
+        $properties = [] === $properties ? static::getRequiredProperties() : $properties;
 
         foreach ($properties as $property) {
-            if(!array_key_exists($property, $data)) {
+            if (!array_key_exists($property, $data)) {
                 return false;
             }
         }
@@ -72,7 +72,7 @@ class ClientFactory
         $client->setPassword($password);
 
         foreach ($dayGenerations as $dayGeneration) {
-            if($dayGeneration instanceof DayGeneration) {
+            if ($dayGeneration instanceof DayGeneration) {
                 $client->addDayGeneration($dayGeneration);
             }
         }
@@ -81,8 +81,8 @@ class ClientFactory
     }
 
     public function createOneByArray(array $data, bool $hashPassword = true): Client|false
-    { 
-        if(!$this->assertDataHasAllKeys($data)) {
+    {
+        if (!$this->assertDataHasAllKeys($data)) {
             return false;
         }
 
@@ -95,7 +95,7 @@ class ClientFactory
             growattName: $data['GrowattName'],
             roles: $data['Roles'],
             password: $data['Password'],
-            dayGenerations: $shouldDayGenerations ? $data['DayGenerations']: [],
+            dayGenerations: $shouldDayGenerations ? $data['DayGenerations'] : [],
             hashPassword: $hashPassword
         );
 
