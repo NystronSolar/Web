@@ -34,7 +34,7 @@ class DashboardController extends AbstractController
         $hours = '0';
         $daysCounter = 0;
 
-        /** @var $yearGenerations DayGeneration[] */
+        /** @var DayGeneration[] $yearGenerations */
         $yearGenerations = $dayGenerationRepository->findGenerationBetweenDates($start, $end, $client);
         foreach ($yearGenerations as $dayGeneration) {
             ++$daysCounter;
