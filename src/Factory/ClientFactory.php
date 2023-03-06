@@ -101,4 +101,39 @@ class ClientFactory
 
         return $client;
     }
+
+    public function update(Client $client, array $data, bool $hashPassword = true): Client
+    {
+        $properties = static::getRequiredProperties();
+
+        foreach ($data as $property => $value) {
+            $isDayGenerations = 'DayGenerations' === $property;
+
+            if ($isDayGenerations) {
+                foreach ($value as $dayGeneration) {
+                    if ($dayGeneration instanceof DayGeneration) {
+                        $client->addDayGeneration($dayGeneration);
+
+                        continue;
+                    }
+                }
+            }
+
+            if (in_array($property, $properties)) {
+                $setMethod = 'set'.$property;
+
+                if ('Password' === $property && $hashPassword) {
+                    $password = $this->passwordHasher->hashPassword($client, $value);
+
+                    $client->$setMethod($password);
+
+                    continue;
+                }
+
+                $client->$setMethod($value);
+            }
+        }
+
+        return $client;
+    }
 }

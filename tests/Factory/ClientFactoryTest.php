@@ -23,6 +23,16 @@ class ClientFactoryTest extends TestCase
         'Password' => 'client',
     ];
 
+    private array $wrongClient = [
+        'Name' => 'Wrong Name',
+        'Email' => 'Wrong Email',
+        'CPF' => 'Wrong CPF',
+        'GrowattName' => 'Wrong Growatt Name',
+        'Roles' => ['Wrong Roles'],
+        'Password' => 'Wrong Password Hash',
+        'DayGenerations' => [],
+    ];
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -63,6 +73,21 @@ class ClientFactoryTest extends TestCase
             password: $data['Password'],
             dayGenerations: $data['DayGenerations'],
             hashPassword: $hashPassword
+        );
+    }
+
+    /**
+     * Run $clientFactory->update().
+     *
+     * @param Client $client The client to be updated
+     * @param array  $data   The data to be updated
+     */
+    private function updateClient(Client $client, array $data, bool $hashPassword = true): Client
+    {
+        return $this->clientFactory->update(
+            $client,
+            $data,
+            $hashPassword
         );
     }
 
@@ -162,5 +187,54 @@ class ClientFactoryTest extends TestCase
 
         // Assert
         $this->assertFalse($client);
+    }
+
+    public function testUpdateByArrayDefaultClient(): void
+    {
+        // Arrange
+        $data = $this->defaultClient;
+
+        // Act
+        $client = $this->createOneClient($this->wrongClient);
+
+        $client = $this->updateClient($client, $data);
+
+        // Assert
+        $this->assertSame($data['Name'], $client->getName());
+        $this->assertSame($data['Email'], $client->getEmail());
+        $this->assertSame($data['CPF'], $client->getCPF());
+        $this->assertSame($data['GrowattName'], $client->getGrowattName());
+        $this->assertSame($data['Roles'], $client->getRoles());
+        $this->assertSame('PasswordHash', $client->getPassword(), 'The Password isn\'t Hashed or are Hashed Incorrectly.');
+        $this->assertSame($data['DayGenerations'], $client->getDayGenerations()->toArray());
+    }
+
+    public function testUpdateByArrayDefaultClientNoHash(): void
+    {
+        // Arrange
+        $data = $this->defaultClient;
+
+        // Act
+        $client = $this->createOneClient($this->wrongClient);
+
+        $client = $this->updateClient($client, $data, false);
+
+        // Assert
+        $this->assertSame($data['Password'], $client->getPassword(), 'The Password are being Hashed or modified (Parameter bool $hashPassword in CreateOne() method is False.).');
+    }
+
+    public function testUpdateByArrayDefaultClientNoDaysGenerations(): void
+    {
+        // Arrange
+        $data = $this->defaultClient;
+        $data['DayGenerations'] = [];
+
+        // Act
+        $client = $this->createOneClient($this->wrongClient);
+
+        $client = $this->updateClient($client, $data);
+
+        // Assert
+        $this->assertSame($data['DayGenerations'], $client->getDayGenerations()->toArray());
     }
 }
