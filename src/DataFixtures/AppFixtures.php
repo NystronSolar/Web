@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Client;
 use App\Entity\DayGeneration;
+use App\Factory\ClientFactory;
 use App\Repository\DayGenerationRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -104,32 +105,22 @@ class AppFixtures extends Fixture
         );
     }
 
-    public function hashPassword(Client $client, string $password): string
-    {
-        $passwordHasher = $this->passwordHasher;
-
-        return $passwordHasher->hashPassword($client, $password);
-    }
-
     /**
      * @param array<int, DayGeneration> $dayGenerations
      */
     public function createOneClient(string $name, string $email, string $cpf, string $growattName, array $roles, string $password, bool $hashPassword = true, int $months = 1): Client
     {
         $months = $months > 12 ? 12 : $months;
-        $client = new Client();
-
-        $client->setName($name);
-        $client->setEmail($email);
-        $client->setCPF($cpf);
-        $client->setGrowattName($growattName);
-        $client->setRoles($roles);
-
-        if ($hashPassword) {
-            $password = $this->hashPassword($client, $password);
-        }
-
-        $client->setPassword($password);
+        $clientFactory = new ClientFactory($this->passwordHasher);
+        $client = $clientFactory->createOne(
+            name: $name,
+            email: $email,
+            cpf: $cpf,
+            growattName: $growattName,
+            roles: $roles,
+            password: $password,
+            hashPassword: $hashPassword
+        );
 
         /** @var \App\Repository\ClientRepository $clientRepository */
         $clientRepository = $this->manager->getRepository(Client::class);

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Client;
+use App\Factory\ClientFactory;
 use App\Form\NewClientFormType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,13 +36,12 @@ class ClientController extends AbstractController
             $cpf = str_replace('.', '', $client->getCPF());
             $cpf = str_replace('-', '', $cpf);
 
-            $passwordHash = $passwordHasher->hashPassword($client, $client->getPassword());
-
-            $client
-                ->setRoles(['ROLE_USER'])
-                ->setPassword($passwordHash)
-                ->setCPF($cpf)
-            ;
+            $clientFactory = new ClientFactory($passwordHasher);
+            $client = $clientFactory->update($client, [
+                'Roles' => ['ROLE_USER'],
+                'Password' => $client->getPassword(),
+                'CPF' => $cpf,
+            ]);
 
             $clientRepository->save($client, true);
 
