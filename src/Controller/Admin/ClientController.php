@@ -69,18 +69,20 @@ class ClientController extends AbstractController
     public function showGeneration(Request $request, Client $client): Response
     {
         $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use ($client) {
+            $seconds = bcmul($dayGeneration->getHours(), 3600);
+            $hours = gmdate('H:i', (int) $seconds);
             return [
                 'id' => $dayGeneration->getId(),
                 'client_id' => $client->getId(),
                 'date' => $dayGeneration->getDate(),
                 'generation' => $dayGeneration->getGeneration(),
-                'hours' => gmdate('H:i', (float) $dayGeneration->getHours() * 3600)
+                'hours' => $hours,
             ];
         });
 
         return $this->render('admin/clients/show-generation.html.twig', [
             'client' => $client,
-            'dayGenerations' => $dayGenerations
+            'dayGenerations' => $dayGenerations,
         ]);
     }
 
