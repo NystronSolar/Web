@@ -14,7 +14,14 @@ base.forms.name: Name
 base.forms.password: Password
 base.electric_bills: Electric Bills
 base.generation_details: Generation Details
+base.energy_generated: Energy Generated
+base.hours_generated: Hours Generated
 base.generation: Generation
+base.date: Date
+base.date_format: m/d/Y
+base.client_id: Client Id
+base.id: Id
+base.day_generation_list: Day Generation List
 
 route.index.title.text: We are the %open_bold%Nystron Solar%close_bold%. A Solar Energy company based in Quaraí - Rio Grande do Sul - Brazil
 route.index.buttons.contact: Get in touch
@@ -36,8 +43,6 @@ route.dashboard.index.title.text: Welcome to your dashboard. Here you can access
 route.dashboard.index.admin_subtitle: You are an Admin! 😎
 route.dashboard.index.admin_subtitle.text: Check out your %open_admin_link%Admin Page%close_admin_link%!
 route.dashboard.index.table.month: Month
-route.dashboard.index.table.energy_generated: Energy Generated
-route.dashboard.index.table.hours_generated: Hours Generated
 route.dashboard.index.table.bill_price: Bill Price
 
 route.admin.base.back_admin_index: Back to Admin Index
@@ -49,6 +54,8 @@ route.admin.index.features_list.upload_report_generation: Upload an Report Gener
 route.admin.index.features_list.control_electric_bills: Control Electric Bills
 
 route.admin.clients.base.back_clients_list: Back to Clients List
+route.admin.clients.base.go_to_day_generation: Go to Day Generation List
+route.admin.clients.base.back_client: Back to Client %client_name%
 
 route.admin.clients.index.title: List of Clients
 route.admin.clients.index.add_new_client: Add new Client
@@ -57,6 +64,8 @@ route.admin.clients.new.title: Add a New Nystron Solar Client
 route.admin.clients.new.submit_button: Add Client
 
 route.admin.clients.show.delete_button: Delete Client
+
+route.admin.clients.show.generation.title: Table of Generation
 
 route.admin.upload.reports.generation: Upload Generation Report
 route.admin.upload.reports.generation.title: Upload an Generation Report

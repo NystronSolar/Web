@@ -14,7 +14,14 @@ base.forms.name: Nombre
 base.forms.password: Contraseña
 base.electric_bills: Facturas de Electricidad
 base.generation_details: Detalles de Generación
+base.energy_generated: Energía Generada
+base.hours_generated: Horas de Generación
 base.generation: Detalles de Generación
+base.date: Fecha
+base.date_format: d/m/Y
+base.client_id: Id del Cliente
+base.id: Id
+base.day_generation_list: Lista de Generación Diaria
 
 route.index.title.text: Nosotros somos %open_bold%Nystron Solar%close_bold%. Empresa de Energia Solar con sede en Quaraí - Rio Grande do Sul - Brasil
 route.index.buttons.contact: Entrar en Contacto
@@ -36,8 +43,6 @@ route.dashboard.index.title.text: Bienvenido a tu panel de control. Aquí puede 
 route.dashboard.index.admin_subtitle: ¡Eres un administrador! 😎
 route.dashboard.index.admin_subtitle.text: ¡Consulte su %open_admin_link%Panel de Administración%close_admin_link%!
 route.dashboard.index.table.month: Mes
-route.dashboard.index.table.energy_generated: Energía generada
-route.dashboard.index.table.hours_generated: Horas de Generación
 route.dashboard.index.table.bill_price: Bill Price
 
 route.admin.base.back_admin_index: Volver al Panel de Administración
@@ -49,6 +54,8 @@ route.admin.index.features_list.upload_report_generation: Enviar Informe de Gene
 route.admin.index.features_list.control_electric_bills: Control de Cuentas de Luz
 
 route.admin.clients.base.back_clients_list: Volver a la Lista de Clientes
+route.admin.clients.base.go_to_day_generation: Ir a la lista de Generación Diaria
+route.admin.clients.base.back_client: Volver al Cliente %client_name%
 
 route.admin.clients.index.title: Lista de Clientes
 route.admin.clients.index.add_new_client: Agregar nuevo cliente
@@ -57,6 +64,8 @@ route.admin.clients.new.title: Agregar un nuevo Cliente Nystron Solar
 route.admin.clients.new.submit_button: Agregar Cliente
 
 route.admin.clients.show.delete_button: Eliminar Cliente
+
+route.admin.clients.show.generation.title: Tabla de Generación Diaria
 
 route.admin.upload.reports.generation: Enviar Informe de Generación
 route.admin.upload.reports.generation.title: Enviar un Informe de Generación

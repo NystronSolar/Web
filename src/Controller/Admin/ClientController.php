@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Client;
+use App\Entity\DayGeneration;
 use App\Factory\ClientFactory;
 use App\Form\NewClientFormType;
 use App\Repository\ClientRepository;
@@ -56,11 +57,30 @@ class ClientController extends AbstractController
         ]);
     }
 
-    #[Route(path: '/{client}', name: 'show', methods: 'GET', requirements: ['clients' => '\d+'])]
+    #[Route(path: '/{client}', name: 'show', methods: 'GET', requirements: ['client' => '\d+'])]
     public function show(Request $request, Client $client): Response
     {
         return $this->render('admin/clients/show.html.twig', [
             'client' => $client,
+        ]);
+    }
+
+    #[Route(path: '/{client}/generation', name: 'show.generation', methods: 'GET', requirements: ['client' => '\d+'])]
+    public function showGeneration(Request $request, Client $client): Response
+    {
+        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use ($client) {
+            return [
+                'id' => $dayGeneration->getId(),
+                'client_id' => $client->getId(),
+                'date' => $dayGeneration->getDate(),
+                'generation' => $dayGeneration->getGeneration(),
+                'hours' => gmdate('H:i', (float) $dayGeneration->getHours() * 3600)
+            ];
+        });
+
+        return $this->render('admin/clients/show-generation.html.twig', [
+            'client' => $client,
+            'dayGenerations' => $dayGenerations
         ]);
     }
 
