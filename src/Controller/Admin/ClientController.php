@@ -7,6 +7,7 @@ use App\Entity\DayGeneration;
 use App\Factory\ClientFactory;
 use App\Form\NewClientFormType;
 use App\Repository\ClientRepository;
+use App\Repository\DayGenerationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,7 @@ class ClientController extends AbstractController
         $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use ($client) {
             $seconds = bcmul($dayGeneration->getHours(), 3600);
             $hours = gmdate('H:i', (int) $seconds);
+
             return [
                 'id' => $dayGeneration->getId(),
                 'client_id' => $client->getId(),
@@ -87,9 +89,14 @@ class ClientController extends AbstractController
     }
 
     #[Route(path: '/destroy/{client}', name: 'destroy', methods: ['DELETE', 'GET'])]
-    public function destroy(Request $request, Client $client, ClientRepository $clientRepository): Response
+    public function destroy(Request $request, Client $client, ClientRepository $clientRepository, DayGenerationRepository $dayGenerationRepository): Response
     {
         $clientName = $client->getName();
+
+        foreach ($client->getDayGenerations() as $dayGeneration) {
+            $dayGenerationRepository->remove($dayGeneration);
+        }
+
         $clientRepository->remove($client, true);
 
         $this->addFlash('success', sprintf('Client %s Deleted.', $clientName));
