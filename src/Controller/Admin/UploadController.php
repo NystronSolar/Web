@@ -2,14 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Client;
 use App\Entity\DayGeneration;
 use App\Form\ReportGenerationType;
 use App\Repository\ClientRepository;
 use App\Repository\DayGenerationRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use NystronSolar\GrowattSpreadsheet\GrowattSpreadsheet;
 use NystronSolar\GrowattSpreadsheet\Reader\ReaderFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,26 +30,14 @@ class UploadController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var UploadedFile $report */
-            $report = $form->get('report')->getData();
-
-            $reportFolder = $this->getParameter('kernel.project_dir').'/var/uploads/';
-            $reportFileName = $report->getClientOriginalName();
-            $report->move($reportFolder, $reportFileName);
-
-            $reader = ReaderFactory::fromFile($reportFolder.$reportFileName);
-            $reportSpreadsheet = $reader->search();
-
-            $filesystem = new Filesystem();
-            $filesystem->remove($reportFolder.$reportFileName);
+            $reportSpreadsheet = $this->getReportFile($form);
 
             foreach ($reportSpreadsheet->getClients() as $spreadsheetClient) {
-                $spreadsheetClient->getUserAccountName();
+                $username = $spreadsheetClient->getUserAccountName();
+                $dbClient = $clientRepository->findOneBy(['growattName' => $username]);
 
-                $userAccountName = $spreadsheetClient->getUserAccountName();
-                $client = $clientRepository->findOneBy(['growattName' => $userAccountName]);
-                if (is_null($client)) {
-                    $this->addFlash('error', sprintf('Client %s Not Founded in Database.', $userAccountName));
+                if (is_null($dbClient)) {
+                    $this->addFlash('error', sprintf('Client %s Not Founded in Database.', $username));
 
                     return $this->redirectToRoute('app.admin.uploads.reports.generation');
                 }
@@ -58,7 +49,7 @@ class UploadController extends AbstractController
                     $dayGeneration->setHours($generationDay->getHours());
                     $dayGeneration->setDate($generationDay->getDate());
 
-                    $client->addDayGeneration($dayGeneration);
+                    $dbClient->addDayGeneration($dayGeneration);
 
                     $dayGenerationRepository->save($dayGeneration);
 
@@ -66,12 +57,7 @@ class UploadController extends AbstractController
                 }
             }
 
-            $filesystem = new Filesystem();
-            $filesystem->remove($reportFolder.$reportFileName);
-
-            dd($reportSpreadsheet);
-
-            // return $this->redirectToRoute('app.admin.clients.show', ['client' => $client->getId()]);
+            // return $this->redirectToRoute('app.admin.clients.generation.show', ['client' => $client->getId()]);
         }
 
         $errors = $form->getErrors();
@@ -80,5 +66,23 @@ class UploadController extends AbstractController
             'form' => $form,
             'errors' => $errors,
         ]);
+    }
+
+    private function getReportFile(FormInterface $form): GrowattSpreadsheet
+    {
+        /** @var UploadedFile $report */
+        $report = $form->get('report')->getData();
+
+        $reportFolder = $this->getParameter('kernel.project_dir').'/var/uploads/';
+        $reportFileName = $report->getClientOriginalName();
+        $report->move($reportFolder, $reportFileName);
+
+        $reader = ReaderFactory::fromFile($reportFolder.$reportFileName);
+        $reportSpreadsheet = $reader->search();
+
+        $filesystem = new Filesystem();
+        $filesystem->remove($reportFolder.$reportFileName);
+
+        return $reportSpreadsheet;
     }
 }
