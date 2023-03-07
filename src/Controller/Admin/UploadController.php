@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Client;
 use App\Entity\DayGeneration;
 use App\Form\ReportGenerationType;
 use App\Repository\ClientRepository;
@@ -57,7 +56,9 @@ class UploadController extends AbstractController
                 }
             }
 
-            // return $this->redirectToRoute('app.admin.clients.generation.show', ['client' => $client->getId()]);
+            $this->addFlash('success', sprintf('Report Uploaded'));
+
+            return $this->redirectToRoute('app.admin.clients.index');
         }
 
         $errors = $form->getErrors();

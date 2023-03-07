@@ -11,13 +11,13 @@
 
 {% block main %}
 	<main class="p-3">
-		<h1 class="text-white">{{ 'route.admin.clients.index.title'|trans|raw }}</h1>
-		<a href="{{ path('app.admin.index') }}">{{ 'route.admin.base.back_admin_index'|trans|raw }}</a>
 		{% for message in app.flashes('success') %}
 			<div class="alert alert-success">
 				{{ message }}
 			</div>
 		{% endfor %}
+		<h1 class="text-white">{{ 'route.admin.clients.index.title'|trans|raw }}</h1>
+		<a href="{{ path('app.admin.index') }}">{{ 'route.admin.base.back_admin_index'|trans|raw }}</a>
 		<table class="table table-bordered table-striped table-dark mt-3">
 			<thead>
 				<tr>

@@ -41,7 +41,7 @@
 				{% for dayGeneration in dayGenerations %}
 					<tr>
 						<th scope="rol">
-							<a href="{{ path('app.admin.day_generations.show', {dayGeneration: dayGeneration.id}) }}" class="text-light">{{ dayGeneration.id }}</a>
+							<a href="{{ path('app.admin.generations.show', {dayGeneration: dayGeneration.id}) }}" class="text-light">{{ dayGeneration.id }}</a>
 						</th>
 						<td>
 							<a href="{{ path('app.admin.clients.show', {client: client.id}) }}" class="text-light">{{ client.name }}</a>

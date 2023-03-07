@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/admin/day_generations', name: 'app.admin.day_generations.')]
-class DayGenerationController extends AbstractController
+#[Route('/admin/generations', name: 'app.admin.generations.')]
+class GenerationController extends AbstractController
 {
     #[Route(path: '/{dayGeneration}', name: 'show', methods: 'GET', requirements: ['day_generation' => '\d+'])]
     public function show(Request $request, DayGeneration $dayGeneration): Response
