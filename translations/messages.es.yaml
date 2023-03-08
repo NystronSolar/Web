@@ -45,6 +45,8 @@ route.dashboard.index.admin_subtitle.text: ¡Consulte su %open_admin_link%Panel 
 route.dashboard.index.table.month: Mes
 route.dashboard.index.table.bill_price: Bill Price
 
+route.dashboard.generation.back_dashboard_index: Volver al Panel de Control
+
 route.admin.base.back_admin_index: Volver al Panel de Administración
 
 route.admin.index.title: Panel de Administración

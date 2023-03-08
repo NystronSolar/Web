@@ -45,6 +45,8 @@ route.dashboard.index.admin_subtitle.text: Check out your %open_admin_link%Admin
 route.dashboard.index.table.month: Month
 route.dashboard.index.table.bill_price: Bill Price
 
+route.dashboard.generation.back_dashboard_index: Back to Dashboard
+
 route.admin.base.back_admin_index: Back to Admin Index
 
 route.admin.index.title: Admin Dashboard

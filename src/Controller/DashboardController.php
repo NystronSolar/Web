@@ -68,4 +68,26 @@ class DashboardController extends AbstractController
 
         return $this->render('dashboard/index.html.twig', ['is_admin' => $isAdmin, 'summary' => $fullSummary]);
     }
+
+    #[Route(path: '/generation', name: 'generation', methods: 'GET')]
+    public function generation(Request $request): Response
+    {
+        $client = $this->getUser();
+
+        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use ($client) {
+            $seconds = bcmul($dayGeneration->getHours(), 3600);
+            $hours = gmdate('H:i', (int) $seconds);
+
+            return [
+                'id' => $dayGeneration->getId(),
+                'date' => $dayGeneration->getDate(),
+                'generation' => $dayGeneration->getGeneration(),
+                'hours' => $hours,
+            ];
+        });
+
+        return $this->render('dashboard/generation.html.twig', [
+            'dayGenerations' => $dayGenerations
+        ]);
+    }
 }

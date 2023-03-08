@@ -45,6 +45,8 @@ route.dashboard.index.admin_subtitle.text: Confira sua %open_admin_link%Página 
 route.dashboard.index.table.month: Mês
 route.dashboard.index.table.bill_price: Preço da Conta
 
+route.dashboard.generation.back_dashboard_index: Voltar para o Painel de Controle
+
 route.admin.base.back_admin_index: Voltar para o Painel do Administrador
 
 route.admin.index.title: Painel do Administrador
