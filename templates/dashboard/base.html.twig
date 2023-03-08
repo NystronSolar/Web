@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}{% endblock %}
+
+{% if navList is not defined %}
+	{% set navList = [
+	{
+		'isActive': false,
+		'routeName': 'app.dashboard.index',
+		'icon': '/assets/dashboard/icons/home.svg',
+		'message': 'base.dashboard'
+	},
+	{
+		'isActive': false,
+		'routeName': 'app.dashboard.index',
+		'icon': '/assets/dashboard/icons/electric-bill.svg',
+		'message': 'base.electric_bills'
+	},
+	{
+		'isActive': false,
+		'routeName': 'app.dashboard.generation',
+		'icon': '/assets/dashboard/icons/solar-generation.svg',
+		'message': 'base.generation_details'
+	},
+] %}
+{% endif %}
+
+
+{% block main %}
+	<main class="d-flex flex-wrap justify-content-around">
+		<nav class="p-3">
+			<h2 class="h3">Menu</h2>
+			<ul class="nav flex-column">
+				{% for item in navList %}
+					<li class="nav-item">
+						<a class="nav-link px-0 py-2 {{item.isActive ? 'active' : 'text-secondary'}}" {{item.isActive ? 'aria-current="page"' : ''}} href="{{ path(item.routeName) }}">
+							<img src="{{item.icon}}" width="20" height="20"/>
+							{{ item.message|trans|raw }}
+						</a>
+					</li>
+				{% endfor %}
+
+				{# <li class="nav-item">
+					<a class="nav-link px-0 py-2 active" aria-current="page" href="{{ path('app.dashboard.index') }}">
+						<img src="/assets/dashboard/icons/home-active.svg" width="20" height="20"/>
+						{{ 'base.dashboard'|trans|raw }}
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link px-0 py-2 text-secondary" aria-current="page" href="/dashboard">
+						<img src="/assets/dashboard/icons/electric-bill.svg" width="20" height="20"/>
+						{{ 'base.electric_bills'|trans|raw }}
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link px-0 py-2 text-secondary" aria-current="page" href="{{ path('app.dashboard.generation') }}">
+						<img src="/assets/dashboard/icons/solar-generation.svg" width="20" height="20"/>
+						{{ 'base.generation_details'|trans|raw }}
+					</a>
+				</li> #}
+			</ul>
+		</nav>
+		<div class="mt-3 mx-3 w-75">
+			{% block content %}{% endblock %}
+		</div>
+	</main>
+{% endblock %}

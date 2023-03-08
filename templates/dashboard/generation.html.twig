@@ -1,6 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block head %}{% endblock %}
+{% extends 'dashboard/base.html.twig' %}
 
 {% block title %}
 	Nystron Solar |
@@ -9,34 +7,52 @@
 	{{ 'base.day_generation_list'|trans|raw }}
 {% endblock %}
 
-{% block main %}
-	<main class="p-3 text-white">
-		<h1>{{ 'route.admin.clients.show.generation.title'|trans|raw}}</h1>
-		<a href="{{ path('app.dashboard.index') }}">{{ 'route.dashboard.generation.back_dashboard_index'|trans|raw }}</a>
-		<table class="table table-bordered table-striped table-dark mt-3">
-			<thead>
+{% set navList = [
+	{
+		'isActive': false,
+		'routeName': 'app.dashboard.index',
+		'icon': '/assets/dashboard/icons/home.svg',
+		'message': 'base.dashboard'
+	},
+	{
+		'isActive': false,
+		'routeName': 'app.dashboard.index',
+		'icon': '/assets/dashboard/icons/electric-bill.svg',
+		'message': 'base.electric_bills'
+	},
+	{
+		'isActive': true,
+		'routeName': 'app.dashboard.generation',
+		'icon': '/assets/dashboard/icons/solar-generation-active.svg',
+		'message': 'base.generation_details'
+	},
+] %}
+
+{% block content %}
+	<h1>{{ 'route.admin.clients.show.generation.title'|trans|raw}}</h1>
+	<a href="{{ path('app.dashboard.index') }}">{{ 'route.dashboard.generation.back_dashboard_index'|trans|raw }}</a>
+	<table class="table table-bordered table-striped table-dark mt-3">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">{{'base.date'|trans|raw}}</th>
+				<th scope="col">{{'base.energy_generated'|trans|raw}}
+					(kWh)</th>
+				<th scope="col">{{'base.hours_generated'|trans|raw}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for dayGeneration in dayGenerations %}
 				<tr>
-					<th scope="col">#</th>
-					<th scope="col">{{'base.date'|trans|raw}}</th>
-					<th scope="col">{{'base.energy_generated'|trans|raw}}
-						(kWh)</th>
-					<th scope="col">{{'base.hours_generated'|trans|raw}}</th>
+					<th scope="rol">
+						<p class="text-light">{{ dayGeneration.id }}</p>
+					</th>
+					<td>{{ dayGeneration.date|date('base.date_format'|trans|raw)}}</td>
+					<td>{{ dayGeneration.generation }}
+						kWh</td>
+					<td>{{ dayGeneration.hours }}</td>
 				</tr>
-			</thead>
-			<tbody>
-				{% for dayGeneration in dayGenerations %}
-					<tr>
-						<th
-							scope="rol">
-							<p class="text-light">{{ dayGeneration.id }}</p>
-						</th>
-						<td>{{ dayGeneration.date|date('base.date_format'|trans|raw)}}</td>
-						<td>{{ dayGeneration.generation }}
-							kWh</td>
-						<td>{{ dayGeneration.hours }}</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</main>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}
