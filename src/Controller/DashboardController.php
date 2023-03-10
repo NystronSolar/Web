@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/dashboard', name: 'app.dashboard.')]
 class DashboardController extends AbstractController
@@ -70,13 +71,35 @@ class DashboardController extends AbstractController
     }
 
     #[Route(path: '/generation', name: 'generation', methods: 'GET')]
-    public function generation(Request $request): Response
+    public function generation(Request $request, TranslatorInterface $translator): Response
     {
         $client = $this->getUser();
 
-        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use ($client) {
+        $labels = [];
+        $datasets = [
+            'generation' => [
+                'backgroundColor' => 'rgba(54, 162, 235, 0.5)',
+                'borderColor' => 'rgb(54, 162, 235)',
+                'key' => 'app-energy-generated-chart',
+                'label' => $translator->trans('base.energy_generated') . ' (kWh)',
+                'data' => [],
+            ],
+            'time' => [
+                'backgroundColor' => 'rgba(255, 99, 132, 0.5)',
+                'borderColor' => 'rgb(255, 99, 132)',
+                'key' => 'app-time-generated-chart',
+                'label' => $translator->trans('base.hours_generated'),
+                'data' => [],
+            ],
+        ];
+
+        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use (&$labels, &$datasets, $translator) {
             $seconds = bcmul($dayGeneration->getHours(), 3600);
             $hours = gmdate('H:i', (int) $seconds);
+
+            $labels[] = $dayGeneration->getDate()->format($translator->trans('base.date_format'));
+            $datasets['generation']['data'][] = $dayGeneration->getGeneration();
+            $datasets['time']['data'][] = $dayGeneration->getHours();
 
             return [
                 'id' => $dayGeneration->getId(),
@@ -87,7 +110,11 @@ class DashboardController extends AbstractController
         });
 
         return $this->render('dashboard/generation.html.twig', [
-            'dayGenerations' => $dayGenerations
+            'dayGenerations' => $dayGenerations,
+            'chart' => [
+                'labels' => $labels,
+                'datasets' => $datasets,
+            ],
         ]);
     }
 }

@@ -46,6 +46,8 @@ route.dashboard.index.table.month: Month
 route.dashboard.index.table.bill_price: Bill Price
 
 route.dashboard.generation.back_dashboard_index: Back to Dashboard
+route.dashboard.generation.energy-generation-chart-button: Energy Generation Chart
+route.dashboard.generation.time-generation-chart-button: Time Generation Chart
 
 route.admin.base.back_admin_index: Back to Admin Index
 

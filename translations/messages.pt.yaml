@@ -46,6 +46,8 @@ route.dashboard.index.table.month: Mês
 route.dashboard.index.table.bill_price: Preço da Conta
 
 route.dashboard.generation.back_dashboard_index: Voltar para o Painel de Controle
+route.dashboard.generation.energy-generation-chart-button: Gráfico de Geração de Energia
+route.dashboard.generation.time-generation-chart-button: Gráfico de Tempo de Geração
 
 route.admin.base.back_admin_index: Voltar para o Painel do Administrador
 

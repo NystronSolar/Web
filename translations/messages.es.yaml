@@ -46,6 +46,8 @@ route.dashboard.index.table.month: Mes
 route.dashboard.index.table.bill_price: Bill Price
 
 route.dashboard.generation.back_dashboard_index: Volver al Panel de Control
+route.dashboard.generation.energy-generation-chart-button: Gráfico de Generación de Energía
+route.dashboard.generation.time-generation-chart-button: Gráfico de Tiempo de Generación
 
 route.admin.base.back_admin_index: Volver al Panel de Administración
 

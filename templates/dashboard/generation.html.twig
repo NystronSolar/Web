@@ -31,6 +31,82 @@
 {% block content %}
 	<h1>{{ 'route.admin.clients.show.generation.title'|trans|raw}}</h1>
 	<a href="{{ path('app.dashboard.index') }}">{{ 'route.dashboard.generation.back_dashboard_index'|trans|raw }}</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#energy-generation-chart" role="button" aria-expanded="false" aria-controls="energy-generation-chart">
+    {{ 'route.dashboard.generation.energy-generation-chart-button'|trans|raw }}
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#time-generation-chart" aria-expanded="false" aria-controls="time-generation-chart">
+    {{ 'route.dashboard.generation.time-generation-chart-button'|trans|raw }}
+  </button>
+</p>
+<div class="collapse" id="energy-generation-chart">
+  <div class="card card-body">
+	<canvas id="app-energy-generated-chart"></canvas>
+  </div>
+</div>
+<div class="collapse" id="time-generation-chart">
+  <div class="card card-body">
+	<canvas id="app-time-generated-chart"></canvas>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	<table class="table table-bordered table-striped table-dark mt-3">
 		<thead>
 			<tr>
@@ -55,4 +131,38 @@
 			{% endfor %}
 		</tbody>
 	</table>
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="/assets/dashboard/charts/generation.js"></script>
+	<script>
+		const labels = JSON.parse('{{ chart.labels|json_encode|e('js') }}')
+
+		var datasets = []
+		var dataset = {}
+
+		{% for dataset in chart.datasets %}
+		function setDataset(dataset) {
+			dataset.fill = false
+			dataset.tension = 0.2
+			dataset.backgroundColor = JSON.parse('{{ dataset.backgroundColor|json_encode|e('js') }}'),
+			dataset.borderColor = JSON.parse('{{ dataset.borderColor|json_encode|e('js') }}'),
+
+			datasets.push(dataset)
+		}
+
+		dataset = {
+			data: JSON.parse('{{ dataset.data|json_encode|e('js') }}'),
+			label: JSON.parse('{{ dataset.label|json_encode|e('js') }}')
+		}
+
+		setDataset(dataset)
+		createChart(JSON.parse('{{dataset.key|json_encode|e('js') }}'), labels, datasets)
+
+		dataset = {}
+		datasets = []
+
+		{% endfor %}
+	</script>
 {% endblock %}
