@@ -33,7 +33,7 @@ route.credits.by: Por
 route.credits.from: En
 route.credits.icons.title: Iconos
 route.credits.icons.home: Hogar
-route.credits.icons.electric_bill: Factura de electricidad
+route.credits.icons.electric_bill: Factura de Electricidad
 route.credits.icons.solar_powered_home: Casa con Energía Solar
 
 route.security.login.title: Entrar en Nystron Solar
@@ -43,7 +43,7 @@ route.dashboard.index.title.text: Bienvenido a tu panel de control. Aquí puede 
 route.dashboard.index.admin_subtitle: ¡Eres un administrador! 😎
 route.dashboard.index.admin_subtitle.text: ¡Consulte su %open_admin_link%Panel de Administración%close_admin_link%!
 route.dashboard.index.table.month: Mes
-route.dashboard.index.table.bill_price: Bill Price
+route.dashboard.index.table.bill_price: Precio da Factura 
 
 route.dashboard.generation.back_dashboard_index: Volver al Panel de Control
 route.dashboard.generation.energy-generation-chart-button: Gráfico de Generación de Energía
