@@ -49,9 +49,9 @@
 				{% for month in summary %}
 					<tr>
 						<td>{{ month.date.month }}/{{ month.date.year }}</td>
-						<td>{{ month.generation }}
+						<td>{{ month.monthGeneration }}
 							kWh</td>
-						<td>{{ month.hours }}</td>
+						<td>{{ month.monthHours }}</td>
 						<td>R$30,00</td>
 					</tr>
 				{% endfor %}

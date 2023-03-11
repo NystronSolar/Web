@@ -64,20 +64,19 @@ class DayGenerationRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
-//    /**
-//     * @return DayGeneration[] Returns an array of DayGeneration objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//    }
+    /**
+     * @return DayGeneration[]|null
+     */
+    public function findLastYearGeneration(Client $client): ?array
+    {
+        $start = new \DateTime('-13 months');
+        $start->setDate((int) $start->format('Y'), (int) $start->format('m'), 1);
 
-//    public function findOneBySomeField($value): ?DayGeneration
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $end = new \DateTime('-1 month');
+        $end->setDate((int) $end->format('Y'), (int) $end->format('m'), (int) $end->format('t'));
+
+        $yearGenerations = $this->findGenerationBetweenDates($start, $end, $client);
+
+        return $yearGenerations;
+    }
 }
