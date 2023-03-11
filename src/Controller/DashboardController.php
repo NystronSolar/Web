@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataProvider\ClientDataProvider;
 use App\Entity\Client;
 use App\Entity\DayGeneration;
 use App\Repository\ClientRepository;
@@ -75,31 +76,13 @@ class DashboardController extends AbstractController
     {
         $client = $this->getUser();
 
-        $labels = [];
-        $datasets = [
-            'generation' => [
-                'backgroundColor' => 'rgba(54, 162, 235, 0.5)',
-                'borderColor' => 'rgb(54, 162, 235)',
-                'key' => 'app-energy-generated-chart',
-                'label' => $translator->trans('base.energy_generated') . ' (kWh)',
-                'data' => [],
-            ],
-            'time' => [
-                'backgroundColor' => 'rgba(255, 99, 132, 0.5)',
-                'borderColor' => 'rgb(255, 99, 132)',
-                'key' => 'app-time-generated-chart',
-                'label' => $translator->trans('base.hours_generated'),
-                'data' => [],
-            ],
-        ];
+        $provider = new ClientDataProvider($translator);
 
-        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use (&$labels, &$datasets, $translator) {
+        $chart = $provider->getClientGenerationChart($client);
+
+        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use (&$labels, &$datasets) {
             $seconds = bcmul($dayGeneration->getHours(), 3600);
             $hours = gmdate('H:i', (int) $seconds);
-
-            $labels[] = $dayGeneration->getDate()->format($translator->trans('base.date_format'));
-            $datasets['generation']['data'][] = $dayGeneration->getGeneration();
-            $datasets['time']['data'][] = $dayGeneration->getHours();
 
             return [
                 'id' => $dayGeneration->getId(),
@@ -111,10 +94,7 @@ class DashboardController extends AbstractController
 
         return $this->render('dashboard/generation.html.twig', [
             'dayGenerations' => $dayGenerations,
-            'chart' => [
-                'labels' => $labels,
-                'datasets' => $datasets,
-            ],
+            'chart' => $chart,
         ]);
     }
 }

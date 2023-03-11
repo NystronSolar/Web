@@ -32,16 +32,16 @@
                     </button>
                     <div>
                         <div class="navbar-nav collapse navbar-collapse" id="navbarNavAltMarkup">
-                            <a class="nav-link px-3" href="{{ path('app.index') }}">{{ 'base.homepage'|trans|raw }}</a>
+                            <a class="nav-link px-3 text-center" href="{{ path('app.index') }}">{{ 'base.homepage'|trans|raw }}</a>
                             {% if app.user %}
-                                <a class="nav-link px-3" href="{{ path('app.security.logout') }}">{{ 'base.logout'|trans|raw }}</a>
-                                <a class="nav-link px-3" href="{{ path('app.dashboard.index') }}">{{ 'base.dashboard'|trans|raw }}</a>
+                                <a class="nav-link px-3 text-center" href="{{ path('app.security.logout') }}">{{ 'base.logout'|trans|raw }}</a>
+                                <a class="nav-link px-3 text-center" href="{{ path('app.dashboard.index') }}">{{ 'base.dashboard'|trans|raw }}</a>
                                 {% if 'ROLE_ADMIN' in app.user.getroles %}
-                                    <a class="nav-link px-3" href="{{ path('app.admin.index') }}">{{ 'base.admin'|trans|raw }}</a>
+                                    <a class="nav-link px-3 text-center" href="{{ path('app.admin.index') }}">{{ 'base.admin'|trans|raw }}</a>
                                 {% endif %}
                             {% endif %}
                             <div class="dropdown d-flex justify-content-center flex-column w-100">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Idioma
                             </button>
                             <ul class="dropdown-menu dropdown-menu-end">

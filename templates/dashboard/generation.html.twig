@@ -31,82 +31,24 @@
 {% block content %}
 	<h1>{{ 'route.admin.clients.show.generation.title'|trans|raw}}</h1>
 	<a href="{{ path('app.dashboard.index') }}">{{ 'route.dashboard.generation.back_dashboard_index'|trans|raw }}</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<p>
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#energy-generation-chart" role="button" aria-expanded="false" aria-controls="energy-generation-chart">
-    {{ 'route.dashboard.generation.energy-generation-chart-button'|trans|raw }}
-  </a>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#time-generation-chart" aria-expanded="false" aria-controls="time-generation-chart">
-    {{ 'route.dashboard.generation.time-generation-chart-button'|trans|raw }}
-  </button>
-</p>
-<div class="collapse" id="energy-generation-chart">
-  <div class="card card-body">
-	<canvas id="app-energy-generated-chart"></canvas>
-  </div>
-</div>
-<div class="collapse" id="time-generation-chart">
-  <div class="card card-body">
-	<canvas id="app-time-generated-chart"></canvas>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<p>
+		<a class="btn btn-primary" data-bs-toggle="collapse" href="#energy-generation-chart" role="button" aria-expanded="false" aria-controls="energy-generation-chart">
+			{{ 'route.dashboard.generation.energy-generation-chart-button'|trans|raw }}
+		</a>
+		<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#time-generation-chart" aria-expanded="false" aria-controls="time-generation-chart">
+			{{ 'route.dashboard.generation.time-generation-chart-button'|trans|raw }}
+		</button>
+	</p>
+	<div class="collapse" id="energy-generation-chart">
+		<div class="card card-body">
+			<canvas id="app-energy-generated-chart"></canvas>
+		</div>
+	</div>
+	<div class="collapse" id="time-generation-chart">
+		<div class="card card-body">
+			<canvas id="app-time-generated-chart"></canvas>
+		</div>
+	</div>
 	<table class="table table-bordered table-striped table-dark mt-3">
 		<thead>
 			<tr>
@@ -118,8 +60,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for dayGeneration in dayGenerations %}
-				<tr>
+			{% for dayGeneration in dayGenerations %} 
+				 <tr>
 					<th scope="rol">
 						<p class="text-light">{{ dayGeneration.id }}</p>
 					</th>
@@ -127,8 +69,8 @@
 					<td>{{ dayGeneration.generation }}
 						kWh</td>
 					<td>{{ dayGeneration.hours }}</td>
-				</tr>
-			{% endfor %}
+				</tr> 
+			 {% endfor %}
 		</tbody>
 	</table>
 {% endblock %}
