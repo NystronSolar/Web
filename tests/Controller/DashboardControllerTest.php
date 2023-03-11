@@ -9,8 +9,8 @@ class DashboardControllerTest extends WebTestCase
     public function testRoutesWithoutLogin(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/dashboard');
+        $client->request('GET', '/en/dashboard');
 
-        $this->assertResponseRedirects('/security/login', 302);
+        $this->assertResponseRedirects('/en/security/login', 302);
     }
 }

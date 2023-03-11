@@ -51,28 +51,28 @@ class SecurityControllerTest extends WebTestCase
         $testUser = $this->getClientRepository()->findOneByEmail('client@user.com');
 
         $client->loginUser($testUser);
-        $client->request('GET', '/security/logout');
+        $client->request('GET', '/en/security/logout');
 
-        $this->assertResponseRedirects('/security/login', 302);
+        $this->assertResponseRedirects('/en/security/login', 302);
         $this->assertNull($client->getRequest()->getUser());
     }
 
     private function sendLogin(array $values): void
     {
         $client = static::createClient();
-        $client->request('GET', '/security/login');
+        $client->request('GET', '/en/security/login');
 
         $client->submitForm('Sign in', $values);
     }
 
     public static function assertLoginFails(): void
     {
-        self::assertResponseRedirects('/security/login', 302);
+        self::assertResponseRedirects('/en/security/login', 302);
     }
 
     public static function assertLoginSuccess(): void
     {
         self::assertResponseStatusCodeSame(302);
-        self::assertResponseRedirects('/dashboard/');
+        self::assertResponseRedirects('/en/dashboard/');
     }
 }
