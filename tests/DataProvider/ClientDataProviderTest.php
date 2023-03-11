@@ -6,7 +6,6 @@ use App\DataProvider\ClientDataProvider;
 use App\Entity\Client;
 use App\Entity\DayGeneration;
 use App\Factory\ClientFactory;
-use DateInterval;
 use Faker\Factory;
 use Faker\Generator;
 use PHPUnit\Framework\TestCase;
@@ -66,24 +65,19 @@ class ClientDataProviderTest extends TestCase
     {
         $arr = [];
 
-        $i = 1;
-        while ($i <= $quantity) {
+        for ($i = 1; $i <= $quantity; ++$i) {
             $now = new \DateTime('now');
             $date = $now->modify("$i day");
-            // date_sub($now, new DateInterval("$i day"));
 
             $dayGeneration = (new DayGeneration())
-                ->setGeneration(bcadd($i, '1'))
+                ->setGeneration($i + 1)
                 ->setHours($i)
                 ->setDate($date)
                 ->setClient($client)
             ;
 
             $arr[] = $dayGeneration;
-
             $client->addDayGeneration($dayGeneration);
-
-            ++$i;
         }
 
         return $arr;
@@ -96,7 +90,7 @@ class ClientDataProviderTest extends TestCase
         return $provider;
     }
 
-    public function testSomething()
+    public function testGetClientGenerationChartMethod()
     {
         $provider = $this->createProvider();
         $client = $this->createOneFakerClient();
@@ -110,8 +104,8 @@ class ClientDataProviderTest extends TestCase
             $date = $now->modify("$i day");
 
             $this->assertSame(
-                $label,
-                $date->format('d/m/Y')
+                $date->format('d/m/Y'),
+                $label
             );
 
             ++$i;

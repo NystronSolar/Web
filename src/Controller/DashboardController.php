@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\DataProvider\ClientDataProvider;
+use App\DataProvider\DayGenerationDataProvider;
 use App\Entity\Client;
 use App\Entity\DayGeneration;
 use App\Repository\ClientRepository;
@@ -76,21 +77,11 @@ class DashboardController extends AbstractController
     {
         $client = $this->getUser();
 
-        $provider = new ClientDataProvider($translator);
+        $clientProvider = new ClientDataProvider($translator);
+        $dayGenerationProvider = new DayGenerationDataProvider($translator);
 
-        $chart = $provider->getClientGenerationChart($client);
-
-        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use (&$labels, &$datasets) {
-            $seconds = bcmul($dayGeneration->getHours(), 3600);
-            $hours = gmdate('H:i', (int) $seconds);
-
-            return [
-                'id' => $dayGeneration->getId(),
-                'date' => $dayGeneration->getDate(),
-                'generation' => $dayGeneration->getGeneration(),
-                'hours' => $hours,
-            ];
-        });
+        $chart = $clientProvider->getClientGenerationChart($client);
+        $dayGenerations = $client->getDayGenerations()->map(\Closure::fromCallable([$dayGenerationProvider, 'styleDayGeneration']));
 
         return $this->render('dashboard/generation.html.twig', [
             'dayGenerations' => $dayGenerations,
