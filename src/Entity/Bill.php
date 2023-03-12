@@ -39,6 +39,12 @@ class Bill
     #[ORM\JoinColumn(nullable: false)]
     private ?Client $client = null;
 
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $dateMonth = null;
+
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $dateYear = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,5 +144,41 @@ class Bill
         $this->client = $client;
 
         return $this;
+    }
+
+    public function getDateMonth(): ?int
+    {
+        return $this->dateMonth;
+    }
+
+    public function setDateMonth(int $dateMonth): self
+    {
+        $this->dateMonth = $dateMonth;
+
+        return $this;
+    }
+
+    public function getDateYear(): ?int
+    {
+        return $this->dateYear;
+    }
+
+    public function setDateYear(int $dateYear): self
+    {
+        $this->dateYear = $dateYear;
+
+        return $this;
+    }
+
+    /**
+     * Generate an DateTime object based in dateYear and dateMonth properties
+     */
+    public function generateDateTimeObject(): \DateTime
+    {
+        $month = $this->getDateMonth();
+        $year = $this->getDateYear();
+        $date = \DateTime::createFromFormat('d/m/Y', "1/$month/$year");
+
+        return $date;
     }
 }
