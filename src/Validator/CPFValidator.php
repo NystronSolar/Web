@@ -33,7 +33,7 @@ class CPFValidator extends ConstraintValidator
     /**
      * Checks if a CPF is valid or not.
      */
-    private function isValid(string $cpf): bool
+    public static function isValid(string $cpf): bool
     {
         $cpf = preg_replace('/[^0-9]/is', '', $cpf);
 

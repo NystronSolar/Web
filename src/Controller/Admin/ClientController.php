@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\DayGeneration;
 use App\Factory\ClientFactory;
 use App\Form\NewClientFormType;
+use App\Helper\Formatter;
 use App\Repository\ClientRepository;
 use App\Repository\DayGenerationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,8 +36,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $cpf = str_replace('.', '', $client->getCPF());
-            $cpf = str_replace('-', '', $cpf);
+            $cpf = Formatter::removeStyleCPF($client->getCPF());
 
             $clientFactory = new ClientFactory($passwordHasher);
             $client = $clientFactory->update($client, [
