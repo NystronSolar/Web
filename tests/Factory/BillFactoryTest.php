@@ -18,13 +18,13 @@ class BillFactoryTest extends TestCase
 
     private array $fullBill = [
         'GenerationBalance' => '10000',
-        'EnergyExcess' => '5000'
+        'EnergyExcess' => '5000',
     ];
 
     private array $extraBill = [
         'EnergyConsumed' => '10000',
         'GenerationBalance' => '50000',
-        'EnergyExcess' => '10000'
+        'EnergyExcess' => '10000',
     ];
 
     protected function setUp(): void

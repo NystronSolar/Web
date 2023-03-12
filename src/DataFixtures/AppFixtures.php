@@ -2,14 +2,18 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Bill;
 use App\Entity\Client;
 use App\Entity\DayGeneration;
+use App\Factory\BillFactory;
 use App\Factory\ClientFactory;
+use App\Repository\BillRepository;
 use App\Repository\DayGenerationRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator as Faker;
+use Money\Money;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -46,7 +50,8 @@ class AppFixtures extends Fixture
             'admin'
         );
 
-        $this->createOneClient(
+        $clients = [];
+        $clients[] = $this->createOneClient(
             'Tim',
             'tim@user.com',
             $this->getFaker()->cpf(false),
@@ -56,7 +61,7 @@ class AppFixtures extends Fixture
             true
         );
 
-        $this->createOneClient(
+        $clients[] = $this->createOneClient(
             'Noah',
             'noah@user.com',
             $this->getFaker()->cpf(false),
@@ -65,7 +70,7 @@ class AppFixtures extends Fixture
             'Noah'
         );
 
-        $this->createOneClient(
+        $clients[] = $this->createOneClient(
             'Mia',
             'mia@user.com',
             $this->getFaker()->cpf(false),
@@ -74,7 +79,7 @@ class AppFixtures extends Fixture
             'Mia'
         );
 
-        $this->createOneClient(
+        $clients[] = $this->createOneClient(
             'Mary',
             'mary@user.com',
             $this->getFaker()->cpf(false),
@@ -83,7 +88,7 @@ class AppFixtures extends Fixture
             'Mary'
         );
 
-        $this->createOneClient(
+        $clients[] = $this->createOneClient(
             'Steven',
             'steven@user.com',
             $this->getFaker()->cpf(false),
@@ -93,6 +98,7 @@ class AppFixtures extends Fixture
         );
 
         $this->uploadSpreadsheets();
+        $this->createBills($clients);
     }
 
     /**
@@ -136,6 +142,50 @@ class AppFixtures extends Fixture
 
         for ($i = 1; $i <= $finder->count(); ++$i) {
             $dayGenerationRepository->uploadGrowattSpreadsheet($folder."/Fake$i.xlsx");
+        }
+    }
+
+    /**
+     * @param Client[] $clients
+     */
+    public function createBills(array $clients, int $quantityPerClient = 3)
+    {
+        $quantityPerClient = $quantityPerClient > 6 ? 6 : $quantityPerClient;
+        $quantityPerClient = $quantityPerClient < 1 ? 1 : $quantityPerClient;
+
+        $billFactory = new BillFactory();
+
+        foreach ($clients as $client) {
+            $energyBalance = 0;
+            for ($i = 1; $i <= $quantityPerClient; ++$i) {
+                $priceNumber = $this->faker->numberBetween(50, 500);
+                $priceString = (string) $priceNumber.'00';
+                $price = Money::BRL($priceString);
+
+                $energyConsumed = (string) $this->faker->numberBetween(50, 200);
+                $energyExcess = $this->faker->numberBetween(100, 500);
+                $energyBalance = $energyBalance + $energyExcess;
+
+                $bill = $billFactory->createOne(
+                    $price,
+                    new \DateTime('now'),
+                    new \DateTime('+1 month'),
+                    $energyConsumed,
+                    $client,
+                    $i,
+                    2023,
+                    new \DateTime('-1 month'),
+                    $energyBalance,
+                    $energyExcess
+                );
+
+                $client->addBill($bill);
+
+                /** @var BillRepository $billRepository */
+                $billRepository = $this->manager->getRepository(Bill::class);
+                $billRepository->save($bill);
+                $this->manager->flush();
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ use Money\Money;
 
 class BillFactory
 {
-
     public static function assertDataHasAllKeys(array $data, array $properties = []): bool
     {
         $properties = [] === $properties ? static::getRequiredProperties() : $properties;
@@ -56,7 +55,7 @@ class BillFactory
         $dateMonth = $dateMonth > 12 ? 12 : $dateMonth;
         $dateMonth = $dateMonth < 1 ? 1 : $dateMonth;
 
-        if ($previousReadingDate >= $actualReadingDate || $nextReadingDate <= $actualReadingDate || $price->getCurrency()->getCode() !== "BRL") {
+        if ($previousReadingDate >= $actualReadingDate || $nextReadingDate <= $actualReadingDate || 'BRL' !== $price->getCurrency()->getCode()) {
             return false;
         }
 
@@ -96,16 +95,16 @@ class BillFactory
         $shouldEnergyExcess = array_key_exists('EnergyExcess', $data);
 
         $bill = $this->createOne(
-        price: $data['Price'],
-        actualReadingDate: $data['ActualReadingDate'],
-        nextReadingDate: $data['NextReadingDate'],
-        energyConsumed: $data['EnergyConsumed'],
-        client: $data['Client'],
-        dateMonth: $data['DateMonth'],
-        dateYear: $data['DateYear'],
-        previousReadingDate: $shouldPreviousReadingDate ? $data['PreviousReadingDate'] : null,
-        generationBalance: $shouldGenerationBalance ? $data['GenerationBalance'] : null,
-        energyExcess: $shouldEnergyExcess ? $data['EnergyExcess'] : null,
+            price: $data['Price'],
+            actualReadingDate: $data['ActualReadingDate'],
+            nextReadingDate: $data['NextReadingDate'],
+            energyConsumed: $data['EnergyConsumed'],
+            client: $data['Client'],
+            dateMonth: $data['DateMonth'],
+            dateYear: $data['DateYear'],
+            previousReadingDate: $shouldPreviousReadingDate ? $data['PreviousReadingDate'] : null,
+            generationBalance: $shouldGenerationBalance ? $data['GenerationBalance'] : null,
+            energyExcess: $shouldEnergyExcess ? $data['EnergyExcess'] : null,
         );
 
         return $bill;
@@ -126,7 +125,7 @@ class BillFactory
             }
 
             if (in_array($property, $properties)) {
-                $setMethod = 'set' . $property;
+                $setMethod = 'set'.$property;
 
                 $bill->$setMethod($value);
             }

@@ -171,7 +171,7 @@ class Bill
     }
 
     /**
-     * Generate an DateTime object based in dateYear and dateMonth properties
+     * Generate an DateTime object based in dateYear and dateMonth properties.
      */
     public function generateDateTimeObject(): \DateTime
     {
