@@ -48,7 +48,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $testUser = $this->getClientRepository()->findOneByEmail('client@user.com');
+        $testUser = $this->getClientRepository()->findOneByEmail('tim@user.com');
 
         $client->loginUser($testUser);
         $client->request('GET', '/en/security/logout');
