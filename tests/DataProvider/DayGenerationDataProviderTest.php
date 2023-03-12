@@ -63,8 +63,13 @@ class DayGenerationDataProviderTest extends TestCase
 
             $now = new \DateTime('now');
             $date = $now->modify("$key day");
-            $seconds = bcmul($generation->getHours(), 3600);
-            $hours = gmdate('H:i', (int) $seconds);
+
+            $seconds = (int) bcmul($generation->getHours(), 3600);
+            $minutes = (int) gmdate('i', (int) $seconds);
+            $hours = (int) gmdate('H', (int) $seconds);
+            $days = (int) gmdate('d', (int) $seconds) - 1;
+            $totalHours = $hours + ($days * 24);
+            $hours = $totalHours.':'.$minutes;
 
             $this->assertNull($styledGeneration['id']);
             $this->assertSame($date->format('d/m/Y'), $styledGeneration['date']->format('d/m/Y'));
