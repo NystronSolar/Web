@@ -6,6 +6,7 @@ use App\Entity\Client;
 use App\Entity\DayGeneration;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use NystronSolar\GrowattSpreadsheet\Reader\ReaderFactory;
 
 /**
  * @extends ServiceEntityRepository<DayGeneration>
@@ -78,5 +79,38 @@ class DayGenerationRepository extends ServiceEntityRepository
         $yearGenerations = $this->findGenerationBetweenDates($start, $end, $client);
 
         return $yearGenerations;
+    }
+
+    /**
+     * @return DayGeneration[]|null
+     */
+    public function uploadGrowattSpreadsheet(string $path): void
+    {
+        $clientRepository = $this->getEntityManager()->getRepository(Client::class);
+        $reader = ReaderFactory::fromFile($path);
+        $reportSpreadsheet = $reader->search();
+
+        foreach ($reportSpreadsheet->getClients() as $spreadsheetClient) {
+            $username = $spreadsheetClient->getUserAccountName();
+            $dbClient = $clientRepository->findOneBy(['growattName' => $username]);
+
+            if (is_null($dbClient)) {
+                throw new \Exception(sprintf('Client %s Not Founded in Database.', $username));
+            }
+
+            foreach ($spreadsheetClient->getGenerationDays() as $generationDay) {
+                $dayGeneration = new DayGeneration();
+
+                $dayGeneration->setGeneration($generationDay->getGeneration());
+                $dayGeneration->setHours($generationDay->getHours());
+                $dayGeneration->setDate($generationDay->getDate());
+
+                $dbClient->addDayGeneration($dayGeneration);
+
+                $this->save($dayGeneration);
+
+                $this->getEntityManager()->flush();
+            }
+        }
     }
 }

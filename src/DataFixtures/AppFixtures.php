@@ -10,6 +10,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory as FakerFactory;
 use Faker\Generator as Faker;
+use Symfony\Component\Finder\Finder;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
@@ -36,7 +37,7 @@ class AppFixtures extends Fixture
     {
         $this->manager = $manager;
 
-        $defaultAdmin = $this->createOneClient(
+        $this->createOneClient(
             'Admin',
             'admin@user.com',
             $this->getFaker()->cpf(false),
@@ -45,30 +46,17 @@ class AppFixtures extends Fixture
             'admin'
         );
 
-        $defaultClient = $this->createOneClient(
-            'Client',
-            'client@user.com',
-            $this->getFaker()->cpf(false),
-            'Client',
-            ['ROLE_USER'],
-            'client'
-        );
-
-        $clients = $this->createManyFakerClient(5);
-        $clients[] = $defaultAdmin;
-        $clients[] = $defaultClient;
-        $clients[] = $this->createOneClient(
+        $this->createOneClient(
             'Tim',
             'tim@user.com',
             $this->getFaker()->cpf(false),
             'Tim',
             ['ROLE_USER'],
             'Tim',
-            true,
-            12
+            true
         );
 
-        $clients[] = $this->createOneClient(
+        $this->createOneClient(
             'Noah',
             'noah@user.com',
             $this->getFaker()->cpf(false),
@@ -77,7 +65,7 @@ class AppFixtures extends Fixture
             'Noah'
         );
 
-        $clients[] = $this->createOneClient(
+        $this->createOneClient(
             'Mia',
             'mia@user.com',
             $this->getFaker()->cpf(false),
@@ -86,7 +74,7 @@ class AppFixtures extends Fixture
             'Mia'
         );
 
-        $clients[] = $this->createOneClient(
+        $this->createOneClient(
             'Mary',
             'mary@user.com',
             $this->getFaker()->cpf(false),
@@ -95,7 +83,7 @@ class AppFixtures extends Fixture
             'Mary'
         );
 
-        $clients[] = $this->createOneClient(
+        $this->createOneClient(
             'Steven',
             'steven@user.com',
             $this->getFaker()->cpf(false),
@@ -103,6 +91,8 @@ class AppFixtures extends Fixture
             ['ROLE_USER'],
             'Steven'
         );
+
+        $this->uploadSpreadsheets();
     }
 
     /**
@@ -125,99 +115,27 @@ class AppFixtures extends Fixture
         /** @var \App\Repository\ClientRepository $clientRepository */
         $clientRepository = $this->manager->getRepository(Client::class);
 
-        /** @var DayGenerationRepository $dayGenerationRepository */
-        $dayGenerationRepository = $this->manager->getRepository(DayGeneration::class);
-
         $clientRepository->save($client);
 
         $this->manager->flush();
 
-        for ($i = 1; $i <= $months; ++$i) {
-            $month = strtotime("-$i month");
-            $month = date('m/Y', $month);
-            $dayGenerations = $this->createFakerMonthDayGeneration(\DateTime::createFromFormat('m/Y', $month));
-
-            foreach ($dayGenerations as $dayGeneration) {
-                $client->addDayGeneration($dayGeneration);
-
-                $dayGenerationRepository->save($dayGeneration);
-
-                $this->manager->flush();
-            }
-        }
-
         return $client;
     }
 
-    /**
-     * @return Client[]
-     */
-    public function createManyFakerClient(int $quantity): array
+    public function uploadSpreadsheets()
     {
-        $clients = [];
+        /** @var \App\Repository\ClientRepository $clientRepository */
+        $clientRepository = $this->manager->getRepository(Client::class);
 
-        for ($i = 1; $i <= $quantity; ++$i) {
-            $clients[] = $this->createOneFakerClient();
+        /** @var DayGenerationRepository $dayGenerationRepository */
+        $dayGenerationRepository = $this->manager->getRepository(DayGeneration::class);
+
+        $finder = new Finder();
+        $folder = 'tests/Content/GrowattSpreadsheets';
+        $finder->files()->in('tests/Content/GrowattSpreadsheets')->name('*.xlsx');
+
+        for ($i = 1; $i <= $finder->count(); ++$i) {
+            $dayGenerationRepository->uploadGrowattSpreadsheet($folder."/Fake$i.xlsx");
         }
-
-        return $clients;
-    }
-
-    public function createOneFakerClient(): Client
-    {
-        $client = $this->createOneClient(
-            $this->getFaker()->name(),
-            $this->getFaker()->email(),
-            $this->getFaker()->cpf(false),
-            $this->getFaker()->userName(),
-            ['ROLE_USER'],
-            $this->getFaker()->password()
-        );
-
-        return $client;
-    }
-
-    /**
-     * @param array<int, DayGeneration> $dayGenerations
-     */
-    public function createOneDayGeneration(string $generation, string $hours, \DateTime $date): DayGeneration
-    {
-        $dayGeneration = new DayGeneration();
-
-        $dayGeneration->setGeneration($generation);
-        $dayGeneration->setHours($hours);
-        $dayGeneration->setDate($date);
-
-        return $dayGeneration;
-    }
-
-    /**
-     * @return DayGeneration[]
-     */
-    public function createFakerMonthDayGeneration(\DateTime $monthDate = new \DateTime()): array
-    {
-        $year = date_format($monthDate, 'Y');
-        $month = date_format($monthDate, 'm');
-        $daysInMonth = date_format($monthDate, 't');
-
-        $dayGenerations = [];
-
-        for ($i = 1; $i <= $daysInMonth; ++$i) {
-            $date = \DateTime::createFromFormat('d/m/Y', "$i/$month/$year");
-            $dayGenerations[] = $this->createOneFakerDayGeneration($date);
-        }
-
-        return $dayGenerations;
-    }
-
-    public function createOneFakerDayGeneration(\DateTime $date): DayGeneration
-    {
-        $dayGeneration = $this->createOneDayGeneration(
-            (string) $this->getFaker()->randomFloat(1, 5, 20),
-            (string) $this->getFaker()->randomFloat(1, 3, 14),
-            $date
-        );
-
-        return $dayGeneration;
     }
 }
