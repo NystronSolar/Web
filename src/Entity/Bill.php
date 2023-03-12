@@ -26,13 +26,13 @@ class Bill
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $previousReadingDate = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $generationBalance = null;
 
     #[ORM\Column(length: 255)]
     private ?string $energyConsumed = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $energyExcess = null;
 
     #[ORM\ManyToOne(inversedBy: 'bills')]
