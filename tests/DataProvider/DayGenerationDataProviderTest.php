@@ -72,6 +72,7 @@ class DayGenerationDataProviderTest extends TestCase
             $hours = $totalHours.':'.$minutes;
 
             $this->assertNull($styledGeneration['id']);
+            $this->assertNull($styledGeneration['client_id']);
             $this->assertSame($date->format('d/m/Y'), $styledGeneration['date']->format('d/m/Y'));
             $this->assertSame((string) ($key + 1), $styledGeneration['generation']);
             $this->assertSame($hours, $styledGeneration['hours']);

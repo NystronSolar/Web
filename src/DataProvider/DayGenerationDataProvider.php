@@ -16,7 +16,7 @@ class DayGenerationDataProvider extends DataProvider
             'date' => $date,
             'generation' => $dayGeneration->getGeneration(),
             'hours' => $this->styleTime($dayGeneration->getHours()),
-            'client_id' => $dayGeneration->getClient()->getId(),
+            'client_id' => $dayGeneration->getClient()?->getId(),
         ];
     }
 
