@@ -2,8 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\DataProvider\DayGenerationDataProvider;
 use App\Entity\Client;
-use App\Entity\DayGeneration;
 use App\Factory\ClientFactory;
 use App\Form\NewClientFormType;
 use App\Helper\Formatter;
@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin/clients', name: 'app.admin.clients.')]
 class ClientController extends AbstractController
@@ -67,20 +68,10 @@ class ClientController extends AbstractController
     }
 
     #[Route(path: '/{client}/generation', name: 'show.generation', methods: 'GET', requirements: ['client' => '\d+'])]
-    public function showGeneration(Request $request, Client $client): Response
+    public function showGeneration(Request $request, Client $client, TranslatorInterface $translator): Response
     {
-        $dayGenerations = $client->getDayGenerations()->map(function (DayGeneration $dayGeneration) use ($client) {
-            $seconds = bcmul($dayGeneration->getHours(), 3600);
-            $hours = gmdate('H:i', (int) $seconds);
-
-            return [
-                'id' => $dayGeneration->getId(),
-                'client_id' => $client->getId(),
-                'date' => $dayGeneration->getDate(),
-                'generation' => $dayGeneration->getGeneration(),
-                'hours' => $hours,
-            ];
-        });
+        $provider = new DayGenerationDataProvider($translator);
+        $dayGenerations = $client->getDayGenerations()->map(\Closure::fromCallable([$provider, 'styleDayGeneration']));
 
         return $this->render('admin/clients/show-generation.html.twig', [
             'client' => $client,
